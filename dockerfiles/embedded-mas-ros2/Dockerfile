@@ -1,9 +1,8 @@
 FROM osrf/ros:humble-desktop-full
 
-RUN apt-get update && sudo apt-get dist-upgrade -y && apt-get install -y git wget python3-pip vim
+RUN apt-get update && sudo apt-get dist-upgrade -y && apt-get install -y git wget python3-pip vim ros-humble-rosbridge-suite && echo "source opt/ros/humble/setup.bash" >> ~/.bashrc
 RUN pip3 install setuptools==58.2.0
-RUN source /opt/ros/humble/setup.bash
-RUN ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+
 
 
 
@@ -11,7 +10,12 @@ RUN ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 
 ENV DISPLAY=novnc:0.0
 
-# build da imagem: sudo docker build -t maiquelb/embedded-mas-ros2 .
+CMD source opt/ros/humble/setup.bash
+CMD echo "source opt/ros/humble/setup.bash" >> ~/.bashrc
+CMD ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+
+
+# build da imagem: sudo docker build -t maiquelb/embedded-mas-ros2:versao .
 
 # iniciar o container:  sudo docker run -it --rm -p11311:11311 --net=ros maiquelb/embedded-mas-ros2
 
