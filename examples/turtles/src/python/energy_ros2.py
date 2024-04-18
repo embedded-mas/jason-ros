@@ -3,7 +3,7 @@ import random
 import threading
 import time
 
-import rospy
+import rclpy
 from std_msgs.msg import Int32
 
 PROB = 99
@@ -14,13 +14,13 @@ energy_turtle1 = 100
 energy_turtle2 = 100
 
 def callback1(data):
-    rospy.loginfo("Received: %d", data.data)
+    rclpy.loginfo("Received: %d", data.data)
     global energy_turtle1  # Declare a variável como global
     energy_turtle1 = data.data
 
 
 def callback2(data):
-    rospy.loginfo("Received: %d", data.data)
+    rclpy.loginfo("Received: %d", data.data)
     global energy_turtle2  # Declare a variável como global 
     energy_turtle2 = data.data
 
@@ -29,9 +29,9 @@ def publish_random_energy():
     global energy_turtle1  # Declare a variável como global
     global energy_turtle2  # Declare a variável como global 
     
-    #rospy.init_node('listener', anonymous=True) 
-    #rospy.Subscriber("/turtle1/energy", Int32, callback);
-    #rospy.spin()
+    #rclpy.init_node('listener', anonymous=True) 
+    #rclpy.Subscriber("/turtle1/energy", Int32, callback);
+    #rclpy.spin()
 
     while True:
         
@@ -89,10 +89,10 @@ if __name__ == '__main__':
    command = f'ros2 topic pub /turtle1/energy std_msgs/msg/Int32 "{{data: 100}}"'
    command = f'ros2 topic pub /turtle2/energy std_msgs/msg/Int32 "{{data: 100}}"'
 
-   rospy.init_node('listener', anonymous=True) 
-   rospy.Subscriber("/turtle1/energy", Int32, callback1);
-   rospy.Subscriber("/turtle2/energy", Int32, callback2);
-   rospy.spin()
+   rclpy.init_node('listener', anonymous=True) 
+   rclpy.Subscriber("/turtle1/energy", Int32, callback1);
+   rclpy.Subscriber("/turtle2/energy", Int32, callback2);
+   rclpy.spin()
 
    # O programa principal pode continuar executando outras tarefas
    while True:
