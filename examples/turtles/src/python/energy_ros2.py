@@ -43,7 +43,7 @@ def publish_random_energy():
            energy_turtle1 = energy_turtle1 - random_number
         
            # Montar o comando a ser executado
-           command = f'ros2 pub /turtle1/energy std_msgs/Int32 {energy_turtle1}'
+           command = f'ros2 topic pub /turtle2/energy std_msgs/Int32 "{\'data\':' + {energy_turtle1} + '}"
 
            # Executar o comando de forma não bloqueante
            subprocess.Popen(command, shell=True)
@@ -55,7 +55,7 @@ def publish_random_energy():
            energy_turtle2 = energy_turtle2 - random_number
         
            # Montar o comando a ser executado
-           command = f'ros2 topic pub /turtle2/energy std_msgs/Int32 "{\'data\'' + {energy_turtle2} + '}"'
+           command = f'ros2 topic pub /turtle2/energy std_msgs/Int32 "{\'data\':' + {energy_turtle2} + '}"'
 
            # Executar o comando de forma não bloqueante
            subprocess.Popen(command, shell=True)   
