@@ -86,8 +86,8 @@ if __name__ == '__main__':
 
    energy_turtle1 = 100
    energy_turtle2 = 100
-   command = f'ros2 topic pub /turtle1/energy std_msgs/Int32 "{\'data\':100}"'
-   command = f'ros2 topic pub /turtle2/energy std_msgs/Int32 "{\'data\':100}"'
+   command = f'ros2 topic pub /turtle1/energy std_msgs/msg/Int32 "{{data: 100}}"'
+   command = f'ros2 topic pub /turtle2/energy std_msgs/msg/Int32 "{{data: 100}}"'
 
    rospy.init_node('listener', anonymous=True) 
    rospy.Subscriber("/turtle1/energy", Int32, callback1);
