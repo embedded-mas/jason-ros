@@ -1,9 +1,9 @@
-import subprocess
 import random
 import threading
 import time
 
 import rclpy
+from rclpy.node import Node
 from std_msgs.msg import Int32
 
 PROB = 99
@@ -13,87 +13,77 @@ SLEEP_TIME = 2
 energy_turtle1 = 100
 energy_turtle2 = 100
 
-def callback1(data):
-    rclpy.loginfo("Received: %d", data.data)
-    global energy_turtle1  # Declare a variável como global
-    energy_turtle1 = data.data
+class EnergyNode(Node):
+    def __init__(self):
+        super().__init__('energy_node')
+        self.energy_publisher_1 = self.create_publisher(Int32, '/turtle1/energy', 10)
+        self.energy_publisher_2 = self.create_publisher(Int32, '/turtle2/energy', 10)
+        self.subscription_1 = self.create_subscription(
+            Int32,
+            '/turtle1/energy',
+            self.callback1,
+            10
+        )
+        self.subscription_2 = self.create_subscription(
+            Int32,
+            '/turtle2/energy',
+            self.callback2,
+            10
+        )
+        self.subscription_1  # to prevent unused variable warning
+        self.subscription_2  # to prevent unused variable warning
 
+    def callback1(self, data):
+        self.get_logger().info(f'Received: {data.data}')
+        global energy_turtle1
+        energy_turtle1 = data.data
 
-def callback2(data):
-    rclpy.loginfo("Received: %d", data.data)
-    global energy_turtle2  # Declare a variável como global 
-    energy_turtle2 = data.data
+    def callback2(self, data):
+        self.get_logger().info(f'Received: {data.data}')
+        global energy_turtle2
+        energy_turtle2 = data.data
 
-def publish_random_energy():
-     
-    global energy_turtle1  # Declare a variável como global
-    global energy_turtle2  # Declare a variável como global 
-    
-    #rclpy.init_node('listener', anonymous=True) 
-    #rclpy.Subscriber("/turtle1/energy", Int32, callback);
-    #rclpy.spin()
+    def publish_random_energy(self):
+        global energy_turtle1
+        global energy_turtle2
 
-    while True:
-        
-        
-        probability = random.randint(0, 100)    
-        if(probability<PROB):
-           # Gerar um número inteiro aleatório entre 0 e 100
-           random_number = random.randint(0, DECREMENT)
-           energy_turtle1 = energy_turtle1 - random_number
-        
-           # Montar o comando a ser executado
-           command = f'ros2 topic pub /turtle2/energy std_msgs/msg/Int32 "{{data: {energy_turtle1}}}"'
+        while True:
+            probability = random.randint(0, 100)
+            if probability < PROB:
+                random_number = random.randint(0, DECREMENT)
+                energy_turtle1 -= random_number
+                msg = Int32()
+                msg.data = energy_turtle1
+                self.energy_publisher_1.publish(msg)
+                self.get_logger().info(f'Published to /turtle1/energy: {msg.data}')
 
-           # Executar o comando de forma não bloqueante
-           subprocess.Popen(command, shell=True)
-        
-        probability = random.randint(0, 100)
-        if(probability<PROB):
-           # Gerar um número inteiro aleatório entre 0 e 100
-           random_number = random.randint(0, DECREMENT)
-           energy_turtle2 = energy_turtle2 - random_number
-        
-           # Montar o comando a ser executado
-           command = f'ros2 topic pub /turtle2/energy std_msgs/msg/Int32 "{{data: {energy_turtle2}}}"'
+            probability = random.randint(0, 100)
+            if probability < PROB:
+                random_number = random.randint(0, DECREMENT)
+                energy_turtle2 -= random_number
+                msg = Int32()
+                msg.data = energy_turtle2
+                self.energy_publisher_2.publish(msg)
+                self.get_logger().info(f'Published to /turtle2/energy: {msg.data}')
 
-           # Executar o comando de forma não bloqueante
-           subprocess.Popen(command, shell=True)   
+            time.sleep(SLEEP_TIME)
 
-        # Aguardar 5 segundos
-        time.sleep(SLEEP_TIME)
-'''
-# Iniciar o loop em um thread separado
-publish_thread = threading.Thread(target=publish_random_energy)
-publish_thread.daemon = True  # Isso faz com que a thread seja finalizada quando o programa principal terminar
-publish_thread.start()
+def main():
+    rclpy.init()
+    node = EnergyNode()
 
-energy_turtle1 = 100
-energy_turtle2 = 100
-command = f'ros2 topic pub /turtle1/energy std_msgs/Int32 "{\'data\':100}"'
-command = f'ros2 topic pub /turtle2/energy std_msgs/Int32 "{\'data\':100}"'
+    # Start a thread to publish random energy
+    publish_thread = threading.Thread(target=node.publish_random_energy)
+    publish_thread.daemon = True
+    publish_thread.start()
 
-# O programa principal pode continuar executando outras tarefas
-while True:
-    pass
+    # Spin the node to keep it running and processing callbacks
+    rclpy.spin(node)
 
-'''
+    # Clean up
+    node.destroy_node()
+    rclpy.shutdown()
+
 if __name__ == '__main__':
-   # Iniciar o loop em um thread separado
-   publish_thread = threading.Thread(target=publish_random_energy)
-   publish_thread.daemon = True  # Isso faz com que a thread seja finalizada quando o programa principal terminar
-   publish_thread.start()
+    main()
 
-   energy_turtle1 = 100
-   energy_turtle2 = 100
-   command = f'ros2 topic pub /turtle1/energy std_msgs/msg/Int32 "{{data: 100}}"'
-   command = f'ros2 topic pub /turtle2/energy std_msgs/msg/Int32 "{{data: 100}}"'
-
-   rclpy.init_node('listener', anonymous=True) 
-   rclpy.Subscriber("/turtle1/energy", Int32, callback1);
-   rclpy.Subscriber("/turtle2/energy", Int32, callback2);
-   rclpy.spin()
-
-   # O programa principal pode continuar executando outras tarefas
-   while True:
-       pass
