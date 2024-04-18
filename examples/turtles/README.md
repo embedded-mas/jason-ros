@@ -1,21 +1,22 @@
 # Example of ROS-Based agent
 
 ## Scenario
-This example illustrates agent actions that correspond to ROS service requests. It contains a randomly moving turtle agent (see the agent code [here](src/agt/sample_agent.asl)). The turtle agent moves itself by executing the action ```move_turtle```. This action is concretely realized through the ROS service ```/turtle1/teleport_relative```. This service does not have a response message. Actions based on services without response handling are triggered by the ```defaultEmbeddedInternalAction``` internal action.
+This example considers a scenario where two robots identified as <em>turtle1</em> and <em>>turtle2</em>. Both of them have two goals: (i) to clean the entire environment and (ii) to maintain their energy level above a critical threshold. They have different strategies to navigate the environment: <em>turtle1</em> starts at the leftmost-bottom position of the environment, while <em>turtle2</em> starts at the rightmost-top. The <em>>turtle1</em> continuously follows a north-east-south-east sequence, where the east traversing is smaller than the other ones. <em>turtle2</em>, in turn, continuously follows a south-west-north-west sequence, where the west traversing is smaller than the other ones
 
-To illustrate actions that consider the service responses, the agent also executes the action ```get_loggers```.  This action is concretely realized through the ROS service ```/turtlesim/get_loggers```. This service produces a response, which the agent prints in the console. Actions based on services with response handling are triggered by the ```requestResponseEmbeddedInternalAction``` internal action.
-
-
+The robots need to coordinate their navigation to be efficient to avoid going through a zone that has been already cleaned. Each robot may also have different strategies for saving energy when necessary. In this example, <em>turtle1</em> slows the navigation velocity down while the <em>turtle2</em> decreases the cleaning effort. The robots work in an uncertain environment whose security level that may fall down to a critical level which requires the robots to act to stay safe. This critical security level may be perceived by a single robot. It must share this information so that the other one be aware of this situation and can act to handle it.
 
 
 
-=== Requirements
-1. ROS (recommended [ROS Noetic](http://wiki.ros.org/noetic))
-2. [Rosbridge](http://wiki.ros.org/rosbridge_suite/Tutorials/RunningRosbridge)
-3. [Turtlesim](http://wiki.ros.org/turtlesim)
 
 
 ## Running the example
+
+
+=== Requirements
+1. ROS 1 (recommended [ROS Noetic](http://wiki.ros.org/noetic)) or ROS 2 (recommended [ROS Humble](http://wiki.ros.org/humble)) 
+2. [Rosbridge](http://wiki.ros.org/rosbridge_suite/Tutorials/RunningRosbridge)
+3. [Turtlesim](http://wiki.ros.org/turtlesim)
+
 
 
 ### 1. Ros node setup:
@@ -69,13 +70,17 @@ ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 ##### 1.1.3. Launch the turtlesim simulation
 ROS 1: 
 ```
-rosrun turtlesim turtlesim_node
+(rosrun turtlesim turtlesim_node &\ 
+ (sleep 1 && rosservice call /turtle1/teleport_absolute 0.5 0.5 0 &&\ 
+ rosservice call /clear )) &\
+(sleep 2 && rosservice call /spawn 10.4 10 0 "turtle2"
 ```
 ROS 2:
 ```
 ros2 run turtlesim turtlesim_node
 ```
 
+<!--
 rosservice call /turtle1/teleport_absolute 0.5 0.5 0
 rosservice call /clear
 rostopic pub /turtle1/energy std_msgs/Int32 100
@@ -88,8 +93,8 @@ rosservice call /turtle1/teleport_absolute 0.5 0.5 0
 
 rosrun turtlesim turtlesim_node & (sleep 2 && rosservice call /turtle1/teleport_absolute 0.5 0.5 0 && rosservice call /clear) & (sleep 2 && rosservice call /spawn 10.4 10 0 "turtle2" ) & python3 src/python/energy.py 
 
-
-### 2. Launch the JaCaMo application:
+-->
+### 2. Launch the Multi-Agent System:
 
 Linux:
 ```
