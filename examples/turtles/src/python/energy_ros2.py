@@ -55,7 +55,7 @@ def publish_random_energy():
            energy_turtle2 = energy_turtle2 - random_number
         
            # Montar o comando a ser executado
-           command = f'ros2 topic pub /turtle2/energy std_msgs/Int32 {energy_turtle2}'
+           command = f'ros2 topic pub /turtle2/energy std_msgs/Int32 "{\'data\'' + {energy_turtle2} + '}"'
 
            # Executar o comando de forma não bloqueante
            subprocess.Popen(command, shell=True)   
@@ -70,8 +70,8 @@ publish_thread.start()
 
 energy_turtle1 = 100
 energy_turtle2 = 100
-command = f'ros2 topic pub /turtle1/energy std_msgs/Int32 100'
-command = f'ros2 topic pub /turtle2/energy std_msgs/Int32 100'
+command = f'ros2 topic pub /turtle1/energy std_msgs/Int32 "{\'data\':100}"'
+command = f'ros2 topic pub /turtle2/energy std_msgs/Int32 "{\'data\':100}"'
 
 # O programa principal pode continuar executando outras tarefas
 while True:
@@ -86,8 +86,8 @@ if __name__ == '__main__':
 
    energy_turtle1 = 100
    energy_turtle2 = 100
-   command = f'ros2 topic pub /turtle1/energy std_msgs/Int32 100'
-   command = f'ros2 topic pub /turtle2/energy std_msgs/Int32 100'
+   command = f'ros2 topic pub /turtle1/energy std_msgs/Int32 "{\'data\':100}"'
+   command = f'ros2 topic pub /turtle2/energy std_msgs/Int32 "{\'data\':100}"'
 
    rospy.init_node('listener', anonymous=True) 
    rospy.Subscriber("/turtle1/energy", Int32, callback1);
