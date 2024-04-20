@@ -73,11 +73,15 @@ ROS 1:
 (rosrun turtlesim turtlesim_node &\ 
  (sleep 1 && rosservice call /turtle1/teleport_absolute 0.5 0.5 0 &&\ 
  rosservice call /clear )) &\
-(sleep 2 && rosservice call /spawn 10.4 10 0 "turtle2"
+(sleep 2 && rosservice call /spawn 10.4 10 0 "turtle2")
 ```
 ROS 2:
 ```
-ros2 run turtlesim turtlesim_node
+ros2 run turtlesim turtlesim_node &\
+ (sleep 1 &&\ 
+  ros2 service call /turtle1/teleport_absolute turtlesim/srv/TeleportAbsolute "{x: 0.5, y: 0.5, theta: 0}" &&\ 
+  ros2 service call /clear std_srvs/srv/Empty) &\
+(sleep 1 && ros2 service call /spawn turtlesim/srv/Spawn "{x: 10.4, y: 10.0, theta: 0.0, name: 'turtle2'}")
 ```
 
 <!--
