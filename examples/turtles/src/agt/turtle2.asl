@@ -57,8 +57,9 @@ robot_position(X,Y) :- robot_position(x(X),y(Y),theta(T),linear_velocity(LV),ang
       !keep_energy;
       .                    
 
-+!keep_energy 
-   <- .wait(1000);
+//the robot knows nothing about its energy level
++!keep_energy : not(myEnergy(_)) 
+   <- .wait(myEnergy(_));
       !keep_energy.
 
 +!move: direction(north) 
