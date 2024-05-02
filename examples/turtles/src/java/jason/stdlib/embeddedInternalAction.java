@@ -20,7 +20,6 @@ public class embeddedInternalAction extends defaultEmbeddedInternalAction {
     
         @Override
         public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
-            System.out.println("<<<<<<<<<< testing internal action  >>>>>>>>>> " + this.getClass().getSimpleName() + " - " + args[0]);
             Term[] arguments = new Term[3];
             arguments[0] =  createAtom("sample_roscore"); 
             arguments[1] =  createAtom( this.getClass().getSimpleName());
