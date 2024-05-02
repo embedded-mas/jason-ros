@@ -8,31 +8,41 @@ The robots need to coordinate their navigation to be efficient to avoid going th
 
 
 
-
 ## Running the example
 
-
+<!--
 === Requirements
 1. ROS 1 (recommended [ROS Noetic](http://wiki.ros.org/noetic)) or ROS 2 (recommended [ROS Humble](http://wiki.ros.org/humble)) 
 2. [Rosbridge](http://wiki.ros.org/rosbridge_suite/Tutorials/RunningRosbridge)
 3. [Turtlesim](http://wiki.ros.org/turtlesim)
 
-
+-->
 
 ### 1. Ros node setup:
-It is possible to choose between a container-based setup (only Docker is required) and a local setup (ROS core and related tools are required).
+<!--It is possible to choose between a container-based setup (only Docker is required) and a local setup (ROS core and related tools are required).
 
 #### 1.1 Container-based setup: 
 Requirements: [Docker](https://www.docker.com/)
+-->
 
-First of all, make sure that there is no container named ```novnc```, ```roscore```, or ```embedded-mas-example```. Then, use the following commands to launch the nodes either in ROS 1 or in ROS 2:
-##### 1.1.1 ROS 1: 
+The easiest way to set up the ROS requirements is using docker containers.
+
+First of all, make sure that there is no container named ```novnc``` or ```turtles_example```. Use the following commands to stop and remove these containers if needed:
+```
+sudo docker stop novnc turtles_example
+sudo docker rm novnc turtles_example
+```
+
+Then, use the following commands to launch the nodes:
    ```
 sudo docker run -d --rm --net=ros --env="DISPLAY_WIDTH=3000" --env="DISPLAY_HEIGHT=1800" --env="RUN_XTERM=no" --name=novnc -p=8080:8080 theasp/novnc:latest  && \
 sleep 2 &&\
-sudo docker run -it --name ros1 --rm --net=ros --env="DISPLAY=novnc:0.0" --env="ROS_MASTER_URI=http://localhost:11311" -p11311:11311 -p9090:9090 maiquelb/embedded-mas-ros:0.7 /bin/bash -c 'source /opt/ros/noetic/setup.bash && cd /embedded_mas_ros_example_package/ && git pull && cp -r /embedded_mas_ros_example_package/src/embedded_mas_examples/ /catkin_wsp/src && roscore & (sleep 2 && source /opt/ros/noetic/setup.bash && roslaunch rosbridge_server rosbridge_websocket.launch) & (sleep 2 && source /opt/ros/noetic/setup.bash && (rostopic pub /turtle1/energy std_msgs/Int32 100 & rostopic pub /turtle2/energy std_msgs/Int32 100)) & (sleep 2 && (source /opt/ros/noetic/setup.bash && . /catkin_wsp/devel/setup.bash && rosrun embedded_mas_examples energy_turtle1.py & (sleep 6 && source /opt/ros/noetic/setup.bash && rosservice call /turtle1/consume_energy )) ) & (sleep 1 && source /catkin_wsp/devel/setup.bash && rosrun turtlesim turtlesim_node) & (sleep 2 && source /opt/ros/noetic/setup.bash && rosservice call /turtle1/teleport_absolute 0.5 0.5 0 && rosservice call /clear && rosservice call /spawn 10.4 10 0 "turtle2") && wait'
+sudo docker run -it --name turtles_example --rm --net=ros --env="DISPLAY=novnc:0.0" --env="ROS_MASTER_URI=http://localhost:11311" -p11311:11311 -p9090:9090 maiquelb/embedded-mas-ros:0.7 /bin/bash -c 'source /opt/ros/noetic/setup.bash && cd /embedded_mas_ros_example_package/ && git pull && cp -r /embedded_mas_ros_example_package/src/embedded_mas_examples/ /catkin_wsp/src && roscore & (sleep 2 && source /opt/ros/noetic/setup.bash && roslaunch rosbridge_server rosbridge_websocket.launch) & (sleep 2 && source /opt/ros/noetic/setup.bash && (rostopic pub /turtle1/energy std_msgs/Int32 100 & rostopic pub /turtle2/energy std_msgs/Int32 100)) & (sleep 2 && (source /opt/ros/noetic/setup.bash && . /catkin_wsp/devel/setup.bash && rosrun embedded_mas_examples energy_turtle1.py & (sleep 6 && source /opt/ros/noetic/setup.bash && rosservice call /turtle1/consume_energy )) ) & (sleep 1 && source /catkin_wsp/devel/setup.bash && rosrun turtlesim turtlesim_node) & (sleep 2 && source /opt/ros/noetic/setup.bash && rosservice call /turtle1/teleport_absolute 0.5 0.5 0 && rosservice call /clear && rosservice call /spawn 10.4 10 0 "turtle2") && wait'
 
    ```
+The simulator can then be accessed at http://localhost:8080/vnc.html
+
+<!--
 ##### 1.1.2 ROS 2:
 ```
 sudo docker run -d --rm --net=ros --env="DISPLAY_WIDTH=3000" --env="DISPLAY_HEIGHT=1800" --env="RUN_XTERM=no" --name=novnc -p=8080:8080 theasp/novnc:latest  && \
@@ -96,6 +106,8 @@ rosservice call /turtle1/teleport_absolute 0.5 0.5 0
 rosrun turtlesim turtlesim_node & (sleep 2 && rosservice call /turtle1/teleport_absolute 0.5 0.5 0 && rosservice call /clear) & (sleep 2 && rosservice call /spawn 10.4 10 0 "turtle2" ) & python3 src/python/energy.py 
 
 -->
+
+
 ### 2. Launch the Multi-Agent System:
 
 Linux:
