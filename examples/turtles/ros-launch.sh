@@ -26,10 +26,12 @@ sudo docker run -d --name turtles_example --rm --net=ros --env="DISPLAY=novnc:0.
  )' &&\
  sleep 2 &&\
  sudo docker exec turtles_example /bin/bash -c 'source /opt/ros/humble/setup.bash &&\
-                                                ros2 topic pub -t 1 /turtle1/energy std_msgs/msg/Int32 "{data: 100}" &&\
+                                                ros2 topic pub -t 1 /turtle1/energy std_msgs/msg/Int32 "{data: 1000}" &&\
                                                 ros2 service call /turtle1/teleport_absolute turtlesim/srv/TeleportAbsolute "{x: 0.5, y: 0.5, theta: 0}" &&\
 						  ros2 service call /spawn turtlesim/srv/Spawn "{x: 10.4, y: 10, theta: 0, name: \"turtle2\"}" &&\
 						  ros2 service call /turtle1/set_pen turtlesim/srv/SetPen "{\"r\": 255, \"g\": 255, \"b\": 255, \"width\": 12, \"off\": 0}" &&\
-						  ros2 service call /turtle2/set_pen turtlesim/srv/SetPen "{\"r\": 255, \"g\": 255, \"b\": 255, \"width\": 12, \"off\": 0}"' &&\
+						  ros2 service call /turtle2/set_pen turtlesim/srv/SetPen "{\"r\": 255, \"g\": 255, \"b\": 255, \"width\": 12, \"off\": 0}" &&\
+						  ros2 topic pub -t 1 /turtle2/energy std_msgs/msg/Int32 "{data: 1000}" &&\ 
+						  ros2 service call /clear std_srvs/srv/Empty ' &&\
  sudo docker exec turtles_example /bin/bash -c 'sleep 1 && source /opt/ros/humble/setup.bash && ros2 topic echo --once /turtle1/energy' &&\
  echo -e '\e[1;33m**** Docker container is ready. Start the JaCaMo application****\e[0m'
