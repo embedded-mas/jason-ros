@@ -48,7 +48,8 @@
            - angular:
               - x
               - y
-              - z      
+              - z     
+     
     #Each topic writing action requires to configure three parameters:
     # 1. actionName: the name of the action performed by the agent
     # 2. serviceName: the name of the service to be called
@@ -70,6 +71,8 @@
              - b
              - width
              - 'off'
+        - actionName: recharge
+          serviceName: /turtle1/do_recharge
 
             
 

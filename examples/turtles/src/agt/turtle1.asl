@@ -36,23 +36,26 @@ robot_position(X,Y) :- robot_position(x(X),y(Y),theta(T),linear_velocity(LV),ang
       .
 
 
-+!keep_energy : myEnergy(X) & X >= 50
++!keep_energy : myEnergy(X) & X >= 500
    <- .wait(myEnergy(E) & E\==X);
       !keep_energy.
 
-+!keep_energy : myEnergy(X) & X >= 30 & X < 50
-   <- embedded.mas.bridges.jacamo.ros.rosInternalAction("sample_roscore","start_economic_mode", [255,255,0,5,0]);
-      -+velocity(0.5);
++!keep_energy : myEnergy(X) & X >= 300 & X < 500
+   <- embedded.mas.bridges.jacamo.ros.rosInternalAction("sample_roscore","start_economic_mode", [255,255,0,12,0]);
+      //-+velocity(0.8);
+      -+velocity(0.8*(X/1000)); //slow down proportional to the velocity
       .wait(myEnergy(E) & E\==X);
       !keep_energy;
       .              
 
-+!keep_energy : myEnergy(X) & X < 30
-   <- embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("sample_roscore","start_economic_mode", [255,0,0,5,0]);
-      -+velocity(0);
++!keep_energy : myEnergy(X) & X < 300
+   <- embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("sample_roscore","start_economic_mode", [255,0,0,12,0]);
+      //-+velocity(0);
       //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("sample_roscore","recharge", [255,255,0,5,0]);
-      .wait(myEnergy(100));
-      -+velocity(0.8);
+      .print("My energy level is ", X, ". Recharging...");
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("sample_roscore","recharge", []);
+      .wait(2000);
+      -+velocity(0.8*(X/1000)/2); //fastest slow down proportional to the velocity
       !keep_energy.                    
 
 //the robot knows nothing about its energy level
