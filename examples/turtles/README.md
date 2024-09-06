@@ -18,12 +18,9 @@ The robots need to coordinate their navigation to be efficient to avoid going th
 
 -->
 
-### 1. Ros node setup:
-<!--It is possible to choose between a container-based setup (only Docker is required) and a local setup (ROS core and related tools are required).
+### 1. Simulator setup:
+<!--
 
-#### 1.1 Container-based setup: 
-Requirements: [Docker](https://www.docker.com/)
--->
 
 The easiest way to set up the ROS requirements is using docker containers.
 
@@ -40,6 +37,16 @@ sleep 2 &&\
 sudo docker run -it --name turtles_example --rm --net=ros --env="DISPLAY=novnc:0.0" --env="ROS_MASTER_URI=http://localhost:11311" -p11311:11311 -p9090:9090 maiquelb/embedded-mas-ros:0.7 /bin/bash -c 'source /opt/ros/noetic/setup.bash && cd /embedded_mas_ros_example_package/ && git pull && cp -r /embedded_mas_ros_example_package/src/embedded_mas_examples/ /catkin_wsp/src && roscore & (sleep 2 && source /opt/ros/noetic/setup.bash && roslaunch rosbridge_server rosbridge_websocket.launch) & (sleep 2 && source /opt/ros/noetic/setup.bash && (rostopic pub /turtle1/energy std_msgs/Int32 100 & rostopic pub /turtle2/energy std_msgs/Int32 100)) & (sleep 2 && (source /opt/ros/noetic/setup.bash && . /catkin_wsp/devel/setup.bash && rosrun embedded_mas_examples energy_turtle1.py & (sleep 6 && source /opt/ros/noetic/setup.bash && rosservice call /turtle1/consume_energy )) ) & (sleep 1 && source /catkin_wsp/devel/setup.bash && rosrun turtlesim turtlesim_node) & (sleep 2 && source /opt/ros/noetic/setup.bash && rosservice call /turtle1/teleport_absolute 0.5 0.5 0 && rosservice call /clear && rosservice call /spawn 10.4 10 0 "turtle2" && rosservice call /turtle1/set_pen 255 255 255 12 0 && rosservice call /turtle2/set_pen 255 255 255 12 0) && wait'
 
    ```
+-->
+
+This application uses an extended version of the link:http://wiki.ros.org/turtlesim[turtlesim simulator], where two turtle shaped robots move around a square environment. The robots are controlled by ROS nodes. 
+
+To set up this infrastructure, launch a Docker container with all the requirements using the following command:
+```
+./ros-launch.sh
+```
+If Docker requires sudo permissions, precede the command above with `sudo`.
+
 The simulator can then be accessed at http://localhost:8080/vnc.html
 
 <!--
