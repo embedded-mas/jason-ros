@@ -1,6 +1,6 @@
 FROM maiquelb/embedded-mas-ros:0.4
 
-RUN sudo apt-get update && sudo apt-get install -y wget nano git ros-noetic-turtlesim unzip make build-essential g++ 
+RUN sudo apt-get update && sudo apt-get install -y wget nano git ros-noetic-turtlesim unzip make build-essential g++ ros-noetic-gazebo-ros ros-noetic-gazebo-ros-pkgs ros-noetic-gazebo-ros-control gazebo11 ros-noetic-turtlebot3-gazebo libgl1-mesa-glx libgl1-mesa-dri
 
 
 RUN cd / &&\ 
@@ -16,8 +16,8 @@ RUN cd / &&\
     git pull &&\
     cd / &&\
     cp -r /embedded_mas_ros_example_package/src/embedded_mas_examples/ /catkin_wsp/src &&\
-    cd /catkin_wsp &&\
-    /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
+    /bin/bash -c "source /opt/ros/noetic/setup.bash" &&\
+    cd /
 
 
 

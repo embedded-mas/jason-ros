@@ -25,7 +25,7 @@ repositories {
 dependencies {
     implementation 'org.jacamo:jacamo:0.10-SNAPSHOT'
     //implementation "embedded-mas:embedded-mas:0.058-SNAPSHOT" 
-    implementation "embedded-mas:embedded-mas:0.058-ROS" 
+    implementation "embedded-mas:embedded-mas:0.059-SNAPSHOT" 
     //implementation files('/mnt/1C4C766F4C764414/maiquel/git/embedded-mas-paper-jason-ros/embedded-mas/build/libs/embedded-mas-0.058-SNAPSHOT.jar')
     implementation "javard:javard:0.032-SNAPSHOT"
 
