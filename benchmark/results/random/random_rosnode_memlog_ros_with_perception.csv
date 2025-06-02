@@ -1,0 +1,2 @@
+timestamp,pid,cpu_percent,rss_kb,vsz_kb,cmdline
+2025-05-28;16:02:;57.162146701;-0300,0,0,0,0,processo_finalizado
