@@ -1,3 +1,8 @@
+### 1. Simulator setup:
+
+
+To set up the simulator, launch a Docker container with all the requirements using the following command:
+
 ```
 (sudo docker ps -q --filter "name=novnc" | grep -q . && docker stop novnc || true) &&\
 (sudo docker ps -q --filter "name=noetic" | grep -q . && docker stop noetic || true) &&\
@@ -9,4 +14,17 @@ sudo docker run -it -p11311:11311 -p9090:9090 --rm --net=ros --env="DISPLAY=novn
 sleep 5 && \
 echo -e '\e[1;33m**** Docker container is ready. Start the JaCaMo application ****\e[0m' && \
 tail -f /dev/null"
+```
+
+The simulator can then be accessed at http://localhost:8080/vnc.html
+
+### 2. Launch the Multi-Agent System:
+
+Linux:
+```
+./gradlew run
+```
+Windows:
+```
+gradlew run 
 ```
