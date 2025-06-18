@@ -14,7 +14,7 @@ SAMPLES=0
 
 # Sourcing dos ambientes ROS
 source /opt/ros/noetic/setup.bash
-#source /mnt/1C4C766F4C764414/maiquel/git/embedded_mas_ros_example_package/devel/setup.bash
+source /mnt/1C4C766F4C764414/maiquel/git/embedded_mas_ros_example_package/devel/setup.bash
 
 # Executa o nó ROS em segundo plano
 rosrun embedded_mas_examples "$NODE_NAME" &
