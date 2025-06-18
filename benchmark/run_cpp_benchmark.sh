@@ -1,7 +1,7 @@
 ( docker ps -q --filter "name=novnc" | grep -q . &&  docker stop novnc || true) && \
 ( docker ps -q --filter "name=noetic" | grep -q . &&  docker stop noetic || true) && \
  docker run -d --rm --net=ros --env="DISPLAY_WIDTH=3000" --env="DISPLAY_HEIGHT=1800" --env="RUN_XTERM=no" --name=novnc -p=8080:8080 theasp/novnc:latest && \
- docker run -it -p11311:11311 -p9090:9090 --rm --net=ros --env="DISPLAY=novnc:0.0" --name noetic maiquelb/embedded-mas-ros:0.8a \
+ docker run -it -p11311:11311 -p9090:9090 --rm --net=ros --env="DISPLAY=novnc:0.0" --name noetic maiquelb/embedded-mas-ros:latest \
 /bin/bash -c "
 set -e
 source /opt/ros/noetic/setup.bash || { echo 'Error: Failed to source ROS Noetic'; exit 1; }
