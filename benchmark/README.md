@@ -24,6 +24,11 @@ At the end of the execution, the following log files are available:
 Run the command below to evaluate the memory and CPU consumption of a C++ ROS node. 
 
 ```
+./run_cpp_benchmark.sh
+```
+
+<!--
+```
 (sudo docker ps -q --filter "name=novnc" | grep -q . && sudo docker stop novnc || true) && \
 (sudo docker ps -q --filter "name=noetic" | grep -q . && sudo docker stop noetic || true) && \
 sudo docker run -d --rm --net=ros --env="DISPLAY_WIDTH=3000" --env="DISPLAY_HEIGHT=1800" --env="RUN_XTERM=no" --name=novnc -p=8080:8080 theasp/novnc:latest && \
@@ -68,10 +73,14 @@ tail -f /dev/null
 "
 
 ```
-
+-->
 
 ### Experiments with Python node
 Run the command below to evaluate the memory and CPU consumption of a Python ROS node. 
+```
+./run_python_benchmark.sh
+```
+<!--
 ```
 (sudo docker ps -q --filter "name=novnc" | grep -q . && sudo docker stop novnc || true) && \
 (sudo docker ps -q --filter "name=noetic" | grep -q . && sudo docker stop noetic || true) && \
@@ -115,3 +124,4 @@ echo -e '\e[1;33m**** Docker container is ready. Start the JaCaMo application **
 tail -f /dev/null"
 
 ```
+-->
