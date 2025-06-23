@@ -125,3 +125,10 @@ tail -f /dev/null"
 
 ```
 -->
+
+
+### Experiments with Jason
+Run the command below to evaluate the memory and CPU consumption of a Python ROS node. 
+```
+./run_jason_benchmark.sh
+```
