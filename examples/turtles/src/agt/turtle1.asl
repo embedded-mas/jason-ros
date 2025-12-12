@@ -236,3 +236,7 @@ robot_position(X,Y) :- robot_position(x(X),y(Y),theta(T),linear_velocity(LV),ang
       -+criticals(NC);
       .wait(1000);
       !log.
+      
+-!log      
+   <- .wait(1000);
+      !log.

@@ -24,18 +24,8 @@ repositories {
 
 dependencies {
     implementation 'org.jacamo:jacamo:0.10-SNAPSHOT'
-    //implementation "embedded-mas:embedded-mas:0.058-SNAPSHOT" 
-    implementation "embedded-mas:embedded-mas:0.059-SNAPSHOT" 
-    //implementation files('/mnt/1C4C766F4C764414/maiquel/git/embedded-mas-paper-jason-ros/embedded-mas/build/libs/embedded-mas-0.058-SNAPSHOT.jar')
+    implementation "embedded-mas:embedded-mas:0.061-SNAPSHOT" 
     implementation "javard:javard:0.032-SNAPSHOT"
-
-    //TODO:daqui para baixo, testar se dá pra eliminar quando usar o repositório do embedded-mas em vez de arquivo jar local
-    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.30'
-    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.13.3'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2'  
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.2' 
-    implementation group: 'org.eclipse.jetty.websocket', name: 'websocket-server', version: '9.4.46.v20220331' 
 }
 
 sourceSets {
@@ -64,34 +54,7 @@ task run (type: JavaExec, dependsOn: 'classes') {
 }
 
 
-task uberJar(type: Jar, dependsOn: 'classes') {
-    group      ' JaCaMo'
-    description 'creates a single runnable jar file with all dependencies'
 
-    manifest {
-        attributes 'Main-Class': 'jacamo.infra.JaCaMoLauncher'
-    }
-    baseName = 'jacamo-turtles' // the name must start with jacamo so that jacamo...jar is found in the classpath
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    from (project.projectDir.absolutePath) {
-        include '**/*.asl'
-        include '**/*.xml'
-        include '**/*.jcm'
-        include '*.properties'
-    }
-    from (project.buildDir.absolutePath + '/jcm') {
-        include '**/*'
-    }
-    with jar
-
-    doFirst {
-        copy {
-            from 'turtles.jcm'
-            rename 'turtles.jcm','default.jcm'
-            into project.buildDir.absolutePath + '/jcm'
-        }
-    }
-}
 
 clean {
     delete 'bin'
