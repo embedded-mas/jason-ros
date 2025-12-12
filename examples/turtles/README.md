@@ -1,7 +1,7 @@
 # Example of ROS-Based agent
 
 ## Scenario
-This example considers a scenario where two robots identified as <em>turtle1</em> and <em>>turtle2</em>. Both of them have two goals: (i) to clean the entire environment and (ii) to maintain their energy level above a critical threshold. They have different strategies to navigate the environment: <em>turtle1</em> starts at the leftmost-bottom position of the environment, while <em>turtle2</em> starts at the rightmost-top. The <em>>turtle1</em> continuously follows a north-east-south-east sequence, where the east traversing is smaller than the other ones. <em>turtle2</em>, in turn, continuously follows a south-west-north-west sequence, where the west traversing is smaller than the other ones
+This example considers a scenario where two robots identified as <em>turtle1</em> and <em>turtle2</em>. Both of them have two goals: (i) to clean the entire environment and (ii) to maintain their energy level above a critical threshold. They have different strategies to navigate the environment: <em>turtle1</em> starts at the leftmost-bottom position of the environment, while <em>turtle2</em> starts at the rightmost-top. The <em>turtle1</em> continuously follows a north-east-south-east sequence, where the east traversing is smaller than the other ones. The <em>turtle2</em>, in turn, continuously follows a south-west-north-west sequence, where the west traversing is smaller than the other ones
 
 The robots need to coordinate their navigation to be efficient to avoid going through a zone that has been already cleaned. Each robot may also have different strategies for saving energy when necessary. In this example, <em>turtle1</em> slows the navigation velocity down while the <em>turtle2</em> decreases the cleaning effort. The robots work in an uncertain environment whose security level that may fall down to a critical level which requires the robots to act to stay safe. This critical security level may be perceived by a single robot. It must share this information so that the other one be aware of this situation and can act to handle it. To facilitate the observation of the security level, the simulator background is red when the security level is critical and blue otherwise.
 
@@ -39,7 +39,7 @@ sudo docker run -it --name turtles_example --rm --net=ros --env="DISPLAY=novnc:0
    ```
 -->
 
-This application uses an extended version of the link:http://wiki.ros.org/turtlesim[turtlesim simulator], where two turtle shaped robots move around a square environment. The robots are controlled by ROS nodes. 
+This application uses an extended version of the [turtlesim simulator](http://wiki.ros.org/turtlesim), where two turtle shaped robots move around a square environment. The robots are controlled by ROS nodes. 
 
 To set up this infrastructure, launch a Docker container with all the requirements using the following command:
 ```
