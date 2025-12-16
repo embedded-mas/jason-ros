@@ -46,7 +46,7 @@ This application uses an extended version of the [turtlesim simulator](http://wi
 
 To set up this infrastructure, launch a Docker container with all the requirements using the following command:
 ```
-./ros-launch.sh
+./launch_ros.sh
 ```
 If Docker requires sudo permissions, precede the command above with `sudo`.
 
