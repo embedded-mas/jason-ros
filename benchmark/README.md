@@ -12,7 +12,7 @@ git clone https://github.com/embedded-mas/jason-ros.git
 
 The experiments are based on a simplified version of the Turtlebot3 controlling application, where the robot robot continuously moves randomly when no obstacle is detected within 1 meter; otherwise it moves backward for a short period before resuming its random movement.
 
-The easier way to run the experiments is using Docker containers. Instructions for launching them are detailed below. The Turtlebot can be inspected through a web browser at http://localhost:8080/vnc.html. 
+The easiest way to run the experiments is using Docker containers. Instructions for launching them are detailed below. The Turtlebot can be inspected through a web browser at http://localhost:8080/vnc.html. 
 
 At the end of the execution, the following log files are available:
 - `cmd_vel_log.csv`: lists the timestamp of each writing in the `cmd_vel` topic;
