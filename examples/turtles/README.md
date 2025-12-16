@@ -9,7 +9,10 @@ The robots need to coordinate their navigation to be efficient to avoid going th
 
 
 ## Running the example
-
+Requirements:
+- [Docker](https://www.docker.com/)
+- Java >= 21
+  
 <!--
 === Requirements
 1. ROS 1 (recommended [ROS Noetic](http://wiki.ros.org/noetic)) or ROS 2 (recommended [ROS Humble](http://wiki.ros.org/humble)) 
@@ -18,7 +21,7 @@ The robots need to coordinate their navigation to be efficient to avoid going th
 
 -->
 
-### 1. Simulator setup:
+### 1. Launch the simulator:
 <!--
 
 
