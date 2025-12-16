@@ -1,4 +1,9 @@
-### 1. Simulator setup:
+## Running the example
+Requirements:
+- [Docker](https://www.docker.com/)
+- Java >= 21
+  
+### 1. Launch the simulator:
 
 
 To set up the simulator, launch a Docker container with all the requirements using the following command:
