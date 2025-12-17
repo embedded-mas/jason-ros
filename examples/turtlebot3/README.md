@@ -14,7 +14,7 @@ If Docker requires sudo permissions, precede the command above with `sudo`.
 The simulator can then be accessed at http://localhost:8080/vnc.html
 
 
-### 2. Launch the Multi-Agent System:
+### 2. Launch the Agent System:
 
 Linux:
 ```
