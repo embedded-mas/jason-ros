@@ -5,7 +5,7 @@ Requirements:
   
 ### 1. Launch the simulator:
 
-This application uses an extended version of the [Turtlebot3 simulator](https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/), where a robot moves around walled environment with additional obstacles. The simulator can be launched according to the instructions in its [official website](https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/). However, the easiest, recommended option is to launch a provided Docker container with all the requirements using the following command:
+This application uses an extended version of the [Turtlebot3 simulator](https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/), in which robot moves within a walled environment containing additional obstacles. The simulator can be launched by following the instructions available on the [official website](https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/). However, the easiest and recommended option is to launch the provided Docker container, which includes all the requirements, using the following command:
 ```
 ./ros-launch.sh
 ```
