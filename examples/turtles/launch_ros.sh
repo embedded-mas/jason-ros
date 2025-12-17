@@ -1,5 +1,13 @@
-( sudo docker ps -q --filter "name=turtles_example" | grep -q . && sudo docker stop turtles_example || true) &&\
-sleep 2 &&\
+(docker ps -q --filter "name=novnc" | grep -q . && docker stop novnc || true)
+(docker ps -q --filter "name=embedded-mas-example" | grep -q . && docker stop embedded-mas-example || true)
+sleep 2 
+
+(docker network inspect ros >/dev/null 2>&1 || docker network create ros)
+(docker volume inspect x11socket >/dev/null 2>&1 || docker volume create x11socket)
+
+sudo docker run -d --rm --net=ros     --env="DISPLAY_WIDTH=3000"     --env="DISPLAY_HEIGHT=1800"     --env="RUN_XTERM=no"     --name=novnc -p=8080:8080 theasp/novnc:latest
+
+
 sudo docker run -d --name turtles_example --rm --net=ros \
   --env="DISPLAY=novnc:0.0" \
   --env="ROS_MASTER_URI=http://localhost:11311" \
@@ -37,5 +45,7 @@ sudo docker exec turtles_example /bin/bash -c 'echo "source /opt/ros/humble/setu
     chmod +x test.sh '
     
 sudo docker exec -d turtles_example /bin/bash -c './test.sh'    
+
+sleep 5
 
 echo -e '\e[1;33m**** Docker container is ready. Start the JaCaMo application ****\e[0m'
