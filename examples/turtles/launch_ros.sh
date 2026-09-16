@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 (docker ps -q --filter "name=novnc" | grep -q . && docker stop novnc || true)
 (docker ps -q --filter "name=embedded-mas-example" | grep -q . && docker stop embedded-mas-example || true)
 sleep 2 
@@ -14,6 +17,7 @@ sudo docker run -d --name turtles_example --rm --net=ros \
   -p11311:11311 -p9090:9090 \
   maiquelb/embedded-mas-ros2:latest sleep infinity  
 
+echo -e "\e[1;33m**** Launching ROS 2 container. Wait 5 seconds ****\e[0m"
 
 sudo docker exec -d turtles_example /bin/bash -c 'sleep 1 && source /opt/ros/humble/setup.bash && ros2 run turtlesim turtlesim_node' 
 
@@ -48,4 +52,4 @@ sudo docker exec -d turtles_example /bin/bash -c './test.sh'
 
 sleep 5
 
-echo -e '\e[1;33m**** Docker container is ready. Start the JaCaMo application ****\e[0m'
+echo -e '\e[1;33m**** Docker container is ready. Start the JaCaMo application and open http://localhost:8080/vnc.html ****\e[0m'
