@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{+w}{  }\PYG{n+nt}{className}\PYG{p}{:}\PYG{+w}{  }\PYG{l+lScalar+lScalarPlain}{embedded.mas.bridges.ros.RosMaster}
+\PYG{+w}{  }\PYG{n+nt}{microcontroller}\PYG{p}{:}
+\PYG{+w}{      }\PYG{n+nt}{id}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{ros1}
+\PYG{+w}{      }\PYG{n+nt}{connectionString}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{ws://localhost:9090}\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{}connection with ROS}
+\PYG{+w}{  }\PYG{n+nt}{perceptionTopics}\PYG{p}{:}
+\PYG{+w}{      }\PYG{l+lScalar+lScalarPlain}{...}
+\PYG{+w}{  }\PYG{n+nt}{actions}\PYG{p}{:}
+\PYG{+w}{      }\PYG{l+lScalar+lScalarPlain}{...}
+\PYG{+w}{      }\PYG{l+lScalar+lScalarPlain}{portas}\PYG{p+pIndicator}{:}\PYG{+w}{ }\PYG{esc}{\textbf{\underline{\texttt{portas:}}}
+\end{Verbatim}

@@ -1,0 +1,44 @@
+%% For printing
+%% \documentclass[gray,handout]{beamer}
+%% \usecolortheme{dove}
+
+\usepackage{cmbright}
+
+\usetheme{default}
+\setbeamerfont{alerted text}{series=\bfseries}
+\usecolortheme{rose} % crane (yellow), beetle, dove, beaver
+
+%\setbeamercolor{alerted text}{fg=orange} %foreground}
+\setbeamerfont{alerted text}{series=\mdseries}
+
+% page number
+\setbeamertemplate{footline}{%
+    \raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[20pt]{\color{gray}
+          \scriptsize\insertframenumber}}}\hspace*{5pt}}
+
+
+
+% \defbeamertemplate*{footline}{infolines theme}
+% {
+%   \leavevmode%
+%   \hbox{%
+%   \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,left]{title in head/primary}% /foot
+%     \usebeamerfont{title in head/foot}\hspace*{2ex}
+%     \insertshortauthor \hspace*{2ex}
+%   \end{beamercolorbox}%
+%   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/primary}%
+%     \usebeamerfont{author in head/foot}\hspace*{2ex}\insertshorttitle
+%   \end{beamercolorbox}%
+%   \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{title in head/primary}%
+%     \usebeamerfont{author in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+%   %\includegraphics[width=2cm]{emse.jpg}
+%   \end{beamercolorbox}
+% }%
+%   \vskip0pt%
+% }
+\usenavigationsymbolstemplate{\vbox{}}
+\setbeamercovered{transparent}
+\renewcommand{\emph}[1]{\alert{#1}}
+
+\setbeamertemplate{itemize items}{--}
+

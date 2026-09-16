@@ -1,0 +1,72 @@
+\frametitle{Programming Jason-ROS Robots}\framesubtitle {Executing topic-based actions}{}
+
+\footnotesize
+
+
+
+\begin{columns}
+
+\begin{column}{.48\textwidth}
+
+\begin{block}{{\ssmall Jason-ROS configuration file}}
+
+
+\scriptsize
+\begin{alltt}\ssmall
+- \yamlkey{device_id}: \yamlvalue{sample_roshost}
+     ...
+  \yamlkey{actions}:
+        ...
+     \yamlkey{topicWritingActions}:
+      - \colorbox{yellow}{\yamlkey{actionName}: move_robot}
+        \yamlkey{topicName}: /turtle1/cmd_vel
+        \yamlkey{topicType}: geometry_msgs/Twist
+        \yamlkey{params}:
+           - \colorbox{green}{linear}:
+              - \colorbox{green}{x}
+              - \colorbox{green}{y}
+              - \colorbox{green}{z}
+           - angular:
+              - \colorbox{pink}{x}
+              - \colorbox{pink}{y}
+              - \colorbox{pink}{z}
+\end{alltt}
+
+\end{block}
+\end{column}
+
+\hspace{-20pt} % Adjust space between columns
+
+\begin{column}{.47\textwidth}
+
+\begin{block}{{\ssmall Agent program}}
+
+\begin{alltt}\ssmall
+
+
+       \ \\
+       \ \\
+       \ \\
+
+ +\planhead{triggering\_event} : \belief{context}
+    <- \instruction{...}
+       \instruction{\colorbox{yellow}{.move_robot}(\colorbox{green}{[1,1,0]}, \colorbox{pink}{[0,0,1]}});
+       \instruction{...}
+       \ \\
+       \ \\
+
+
+
+\end{alltt}
+\end{block}
+ \end{column}
+\end{columns}
+
+ {\tiny The internal action has the same parameters as the ROS topic type (in the same order)}\\
+
+ {\tiny The ROS-based internal actions are stored in \texttt{src/java/jason/stdlib}}
+
+ \vfill
+
+ {\tiny An application example of topic-based actions is available \link{https://github.com/embedded-mas/jason-ros-course-wesaac2024/tree/main/resources/example_topic_writing_action}{here}}
+

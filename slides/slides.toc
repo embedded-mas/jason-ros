@@ -1,0 +1,9 @@
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Part I - Introduction to ROS}{4}{0}{1}
+\beamer@subsubsectionintoc {1}{0}{1}{ROS Architecture}{6}{0}{1}
+\beamer@sectionintoc {2}{Part II - Introduction to Jason}{15}{0}{2}
+\beamer@subsectionintoc {2}{1}{Beliefs}{32}{0}{2}
+\beamer@subsectionintoc {2}{2}{Plans}{38}{0}{2}
+\beamer@subsubsectionintoc {2}{2}{1}{Plans and actions}{41}{0}{2}
+\beamer@sectionintoc {3}{Introduction to Jason-ROS}{44}{0}{3}
+\beamer@sectionintoc {4}{References}{75}{0}{4}
