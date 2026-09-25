@@ -10,7 +10,7 @@ The agent has the goal `go_to(X,Y)`, to move from its current position to the co
 
 Informations about the robot position are available in the topic `odom`. 
 
-To move the robot, use either the topic `cmd_vel` or the service `move_robot`.
+To move the robot, use the service `move_robot`.
 
 Information about the topics `odom` and `cmd_vel`are available [here](https://wiki.ros.org/turtlebot3_bringup).
 
