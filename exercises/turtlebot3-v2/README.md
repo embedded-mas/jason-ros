@@ -12,7 +12,7 @@ Informations about the robot position are available in the topic `odom`.
 
 To move the robot, use the service `move_robot`.
 
-Information about the topics `odom` and `cmd_vel`are available [here](https://wiki.ros.org/turtlebot3_bringup).
+Information about the topics `odom` are available [here](https://wiki.ros.org/turtlebot3_bringup).
 
 The service `move_robot` is an extension of the default turtlebot3 simulation. The type of this service is `embedded_mas_examples/MoveRobot`, which requires two parameters --- linear velocity and angular velocity --- and returns *true* in case of success and *false* otherwise, as described below:
 ```
