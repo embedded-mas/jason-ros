@@ -2,7 +2,7 @@
 
 This exercise has an agent (see the agent code [here](src/agt/ros_agent.asl)) whose body is a simulated [Turtlebot3](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/).
 
-The agent has the goal `go_to(X,Y)`, to move from its current position to the coordinates (X,Y). The objective of this exercise is to provide the agents with means to satisfy this goal. 
+The agent has the goal `go_to(X,Y)`, to move from its current position to the coordinates (X,Y). The objective of this exercise is to provide the agent with means to satisfy this goal. 
 
 ## Instructions
 
