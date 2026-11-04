@@ -132,6 +132,23 @@
 %}
 
 
+\newenvironment{grayblock}[1][0.85\linewidth]
+{
+    \setbeamercolor{grayblock}{fg=black,bg=gray!20}
+    %\par\noindent
+    \hfill
+    \begin{beamercolorbox}[
+        wd=#1,
+        sep=1ex,
+        rounded=true
+    ]{grayblock}
+}
+{
+    \end{beamercolorbox}
+    \hfill
+    %\par
+}
+
 \begin{document}
 
 \begin{frame}[plain]
@@ -1477,7 +1494,7 @@ There are two kinds of actions:
 
  \HUGE
 \centering
-Part III\\
+Part I\\
 Introducton to \\
 Jason-ROS 
  
@@ -1532,49 +1549,114 @@ Programming Jason-ROS robots requires to connect
 \end{frame}
 
 
+
 \begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
  
  {\bf Embedded-MAS framework}: \vspace{.2cm}
-   \begin{itemize}
+ 
+ \vspace{.5cm}
+ 
+ \begin{columns}
+    \column{.4\textwidth}
+    
+   \begin{itemize} \scriptsize
     \item integrate Jason agents with physical devices \vspace{.2cm}
-    \item multiple, extensible interfaces (e.g.ROS, serial)
+    \item multiple, extensible interfaces (e.g.ROS, serial)\vspace{.2cm}
+    \item \url{https://github.com/embedded-mas/embedded-mas}
    \end{itemize}
  
+    \column{.6\textwidth}
+    \begin{figure}
+ \centering
+ \includegraphics[scale=.11]{../figs/jason-ros-agent-russel-norvig.pdf}
+ \caption{{\tiny Image adapted from~\cite{russel1995}}}
+\end{figure}
  
+ \end{columns}
+\end{frame}
+
+
+\begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
  
+ {\bf Embedded-MAS framework}: \vspace{.2cm}
+ 
+ \vspace{.5cm}
+ 
+ \begin{columns}
+    \column{.4\textwidth}
+    
+   \begin{itemize} \scriptsize
+    \item integrate Jason agents with physical devices \vspace{.2cm}
+    \item multiple, extensible interfaces (e.g.ROS, serial)\vspace{.2cm}
+    \item \url{https://github.com/embedded-mas/embedded-mas}
+   \end{itemize}
+ 
+    \column{.6\textwidth}
+    \begin{figure}
+ \centering
+ \includegraphics[scale=.25]{../figs/embedded_mas_overall_arhiteture-microcontroller.png}
+\end{figure}
+ 
+ \end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
+ 
+ {\bf Embedded-MAS framework}: \vspace{.2cm}
+ 
+ \vspace{.5cm}
+ 
+ \begin{columns}
+    \column{.4\textwidth}
+    
+   \begin{itemize} \scriptsize
+    \item integrate Jason agents with physical devices \vspace{.2cm}
+    \item multiple, extensible interfaces (e.g.ROS, serial)\vspace{.2cm}
+    \item \url{https://github.com/embedded-mas/embedded-mas}
+   \end{itemize}
+ 
+    \column{.6\textwidth}
+    \begin{figure}
+ \centering
+ \includegraphics[scale=.25]{../figs/embedded_mas_overall_arhiteture-microcontroller_ros.png}
+\end{figure}
+ 
+ \end{columns}
+ 
+\end{frame}
+
+
+
+\begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
+
+ Embedded-MAS extends the default Jason agents: \vspace{.5cm}
+ \begin{itemize}
+  \item perceptions may be obtained from physical sensors\\ {\tiny whose values may be recorded in ROS topics} \vspace{.2cm}
+  
+  \item actions may be realized by physical actuators\\
+       {\tiny which may be controlled by ROS topics and services}
+ \end{itemize}
  
 \end{frame}
 
 
 \begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
 
- Jason-ROS extends the default Jason agents: \vspace{.5cm}
- \begin{itemize}
-  \item perceptions may be obtained from physical sensors\\ {\tiny whose values are recorded in ROS topics} \vspace{.2cm}
-  
-  \item actions may be realized by physical actuators\\
-       {\tiny controlled by ROS topics and services}
- \end{itemize}
+\begin{figure}
+ \centering
+ \includegraphics[scale=.2]{../figs/paper-jason-ros.png}
+ 
+\end{figure}
 
- 
-\vfill
-{\tiny Jason-ROS is availale \link{https://github.com/embedded-mas/jason-ros}{here}}.\\
-{\tiny It is part of a more comprehensive work to combine Jason agents with physical devices available \link{https://github.com/embedded-mas/embedded-mas/}{here}}.
- 
 \end{frame}
 
-\begin{frame}{Jason-ROS}
- \centering
- 
- \begin{figure}
- \includegraphics[scale=.18]{jason-ros-agent-russel-norvig.pdf}
-  \caption{{\tiny Image adapted from~\cite{russel1995}}}
- \end{figure}
- 
- \end{frame}
 
 
-\begin{frame}{Jason-ROS}
+\begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
 
 \begin{figure}
  \centering
@@ -1584,7 +1666,7 @@ Programming Jason-ROS robots requires to connect
 
 \end{frame}
 
-\begin{frame}{Jason-ROS}
+\begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
 
 \begin{figure}
  \centering
@@ -1594,10 +1676,49 @@ Programming Jason-ROS robots requires to connect
  
 \end{frame}
 
-\begin{frame}[fragile]{Jason-ROS}
 
+
+
+\begin{frame}
+ 
+ \HUGE
+\centering
+--- Part II ---\\
+Programming\\
+Jason-ROS Robots\\
+ 
+ \vspace{3em}
+ 
+\scriptsize 
+This section is is accompanied by an example available at \url{https://github.com/issia-2026-jason-ros/turtle-example}
+ 
+ 
+\end{frame}
+
+
+\begin{frame}[fragile]{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
+ 
+ {\bf Warm up:}
+ \vspace{2em}
+ \begin{enumerate}
+  \item Clone the repository at \url{https://github.com/issia-2026-jason-ros/turtle-example}\\  
+  {\tiny \texttt{git clone https://github.com/issia-2026-jason-ros/turtle-example}}
+  \vspace{1em}
+  \item Launch the simulator: \texttt{sudo ./launch\_ros.sh}
+  \vspace{1em}
+  \item Access the simulator interaface at \url{http://localhost:8080/vnc.html}
+  
+ \end{enumerate}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
+\vspace{1em}
 \scriptsize
-\begin{block}{Set up of a Jason-ROS agent in JaCaMo}
+\begin{block}{Set up of a Jason-ROS agent in JaCaMo {\tiny (example available \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/turtle_example.jcm}{here})}}
+ \vspace{-1em}
   \begin{alltt}\scriptsize
    mas jason\_ros \{  
    \ \ \ agent robot1: ros\_agent.asl \{
@@ -1606,6 +1727,7 @@ Programming Jason-ROS robots requires to connect
    \ \ \ \}
   \}
   \end{alltt}    
+   \vspace{-1.2em} 
 \end{block}
 
 \footnotesize
@@ -1627,14 +1749,17 @@ Programming Jason-ROS robots requires to connect
 \end{itemize}
 
 
+
  
 \end{frame}
 
 
-\begin{frame}[fragile]{Jason-ROS}
 
+\begin{frame}[fragile]{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
+\vspace{1em}
 \scriptsize
-\begin{block}{Set up of a Jason-ROS agent in JaCaMo}
+\begin{block}{Set up of a Jason-ROS agent in JaCaMo {\tiny (example available \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/turtle_example.jcm}{here})} }
+\vspace{-1em}
   \begin{alltt}\scriptsize
    mas jason\_ros \{  
    \ \ \ agent robot1: ros\_agent.asl \{
@@ -1643,10 +1768,82 @@ Programming Jason-ROS robots requires to connect
    \ \ \ \}
   \}
   \end{alltt}    
+  \vspace{-1.2em}
 \end{block}
 
 \footnotesize
 \colorbox{yellow}{\bf ag-arch}: defines the Java class that implements the essential functions\\ \ \ \ \ \ \ \ \ \ \ \ \ \ and data structures for the agent to interact with the external world\\ \ \ \ \ \ \ \ \ \ \ \ \ \  {\tiny in the perceive and act phases of the reasoning cycle}
+
+\vspace{.3cm}
+
+\colorbox{cyan}{\bf RosBdiAgArch}: 
+\begin{itemize}
+ \item extends the \href{https://github.com/jason-lang/jason/blob/main/jason-interpreter/src/main/java/jason/architecture/AgArch.java}{\underline{\textcolor{blue}{default agent architecture of Jason}}}\\
+ \item includes the reading of topics in the perceiving process
+\end{itemize}
+
+
+ 
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
+\vspace{1em}
+\scriptsize
+\begin{block}{Set up of a Jason-ROS agent in Jason}
+ \vspace{-1em}
+  \begin{alltt}\scriptsize
+   MAS jason\_ros \{  
+   \ \ \ agents: robot1 ros\_agent.asl
+   \ \ \ \ \ \ \colorbox{yellow}{agentClass}: \colorbox{cyan}{embedded.mas.bridges.jacamo.ros.RosBdiAgent}
+   \ \ \ \ \ \ agentArchClass: embedded.mas.bridges.jacamo.ros.RosBdiAgArch
+  \}
+  \end{alltt}    
+   \vspace{-1.2em} 
+\end{block}
+
+\footnotesize
+\colorbox{yellow}{{\bf agentClass}}: defines the Java class that implements the essential functions\\ \ \ \ \ \ \ \ \ \ \ \ \ \ and data structures for running an agent\\
+
+\vspace{.3cm}
+
+\colorbox{cyan}{{\bf RosBdiAgent}}: 
+\begin{itemize}
+ \item extends the \href{https://github.com/jason-lang/jason/blob/main/jason-interpreter/src/main/java/jason/asSemantics/Agent.java}{\underline{\textcolor{blue}{default Agent class of Jason}}}\\
+ \item provides means for 
+ \begin{itemize}\scriptsize
+   \item including topics among the perception sources of the agent
+   \item linking the action repertory to service calls and topic writings
+   %\item get percepts from topics
+   %\item realize actions by writing in topics and requesting services
+ \end{itemize}
+ 
+\end{itemize}
+
+
+ 
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
+\vspace{1em}
+\scriptsize
+\begin{block}{Set up of a Jason-ROS agent in Jason}
+ \vspace{-1em}
+  \begin{alltt}\scriptsize
+   MAS jason\_ros \{  
+   \ \ \ agents: robot1 ros\_agent.asl
+   \ \ \ \ \ \ agentClass: embedded.mas.bridges.jacamo.ros.RosBdiAgent
+   \ \ \ \ \ \ \colorbox{yellow}{agentArchClass}: \colorbox{cyan}{embedded.mas.bridges.jacamo.ros.RosBdiAgArch}
+  \}
+  \end{alltt}    
+   \vspace{-1.2em} 
+\end{block}
+
+\footnotesize
+\colorbox{yellow}{\bf agentArchClass}: defines the Java class that implements the essential functions\\ \ \ \ \ \ \ \ \ \ \ \ \ \ and data structures for the agent to interact with the external world\\ \ \ \ \ \ \ \ \ \ \ \ \ \  {\tiny in the perceive and act phases of the reasoning cycle}
 
 \vspace{.3cm}
 
@@ -1724,12 +1921,12 @@ is specified in a .yaml configuration file\\ \vspace{-.2cm}
                 \scriptsize
                 \begin{alltt} \tiny
 - \colorbox{yellow}{\yamlkey{device\_id}: \yamlvalue{sample\_roshost}}
-  \yamlkey{className}: \yamlvalue{RosMaster}
+  \yamlkey{class_name}: \yamlvalue{RosMaster}
   \yamlkey{microcontroller}: 
     \yamlkey{id}: \yamlvalue{ros1} 
-    \yamlkey{connectionString}: \yamlvalue{ws://localhost:9090} 
-    \yamlkey{className}: \yamlvalue{DefaultRos4Bdi}
-  \yamlkey{perceptionTopics}:         
+    \yamlkey{connection_string}: \yamlvalue{ws://localhost:9090} 
+    \yamlkey{class_name}: \yamlvalue{DefaultRos4Bdi}
+  \yamlkey{perception_topics}:         
     ...
   \yamlkey{actions}:       
     ...
@@ -1759,6 +1956,9 @@ is specified in a .yaml configuration file\\ \vspace{-.2cm}
   
     the value (e.g.~\texttt{sample\_roshost}) is defined by the developer
     
+    \vfill
+    {\tiny Example available \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/src/agt/robot1.yaml}{here}}
+    
 \end{frame}
 
 
@@ -1779,12 +1979,12 @@ is specified in a .yaml configuration file\\ \vspace{-.2cm}
                 \scriptsize
                 \begin{alltt} \tiny
 - \yamlkey{device\_id}: \yamlvalue{sample\_roshost}
- \colorbox{yellow}{\yamlkey{className}: \yamlvalue{RosMaster}}
+ \colorbox{yellow}{\yamlkey{class_name}: \yamlvalue{RosMaster}}
   \yamlkey{microcontroller}: 
     \yamlkey{id}: \yamlvalue{ros1} 
-    \yamlkey{connectionString}: \yamlvalue{ws://localhost:9090} 
-    \yamlkey{className}: \yamlvalue{DefaultRos4Bdi}
-  \yamlkey{perceptionTopics}:         
+    \yamlkey{connection_string}: \yamlvalue{ws://localhost:9090} 
+    \yamlkey{class_name}: \yamlvalue{DefaultRos4Bdi}
+  \yamlkey{perception_topics}:         
     ...
   \yamlkey{actions}:       
     ...
@@ -1814,6 +2014,9 @@ is specified in a .yaml configuration file\\ \vspace{-.2cm}
   
     the value (e.g.~\texttt{sample\_roshost}) is defined by the developer
     
+    \vfill
+    {\tiny Example available \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/src/agt/robot1.yaml}{here}}
+    
 \end{frame}
 
 
@@ -1835,12 +2038,12 @@ is specified in a .yaml configuration file\\ \vspace{-.2cm}
                 \scriptsize
                 \begin{alltt} \tiny
 - \yamlkey{device\_id}: \yamlvalue{sample\_roshost}
-  \yamlkey{className}: \yamlvalue{RosMaster}
+  \yamlkey{class_name}: \yamlvalue{RosMaster}
   \colorbox{yellow}{\yamlkey{microcontroller}:} 
     \yamlkey{id}: \yamlvalue{ros1} 
-    \yamlkey{connectionString}: \yamlvalue{ws://localhost:9090} 
-    \yamlkey{className}: \yamlvalue{DefaultRos4Bdi}
-  \yamlkey{perceptionTopics}:         
+    \yamlkey{connection_string}: \yamlvalue{ws://localhost:9090} 
+    \yamlkey{class_name}: \yamlvalue{DefaultRos4Bdi}
+  \yamlkey{perception_topics}:         
     ...
   \yamlkey{actions}:       
     ...
@@ -1870,6 +2073,9 @@ is specified in a .yaml configuration file\\ \vspace{-.2cm}
   
     the value (e.g.~\texttt{sample\_roshost}) is defined by the developer
     
+     \vfill
+    {\tiny Example available \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/src/agt/robot1.yaml}{here}}
+    
 \end{frame}
 
 
@@ -1891,12 +2097,12 @@ is specified in a .yaml configuration file\\ \vspace{-.2cm}
                 \scriptsize
                 \begin{alltt} \tiny
 - \yamlkey{device\_id}: \yamlvalue{sample\_roshost}
-  \yamlkey{className}: \yamlvalue{RosMaster}
+  \yamlkey{class_name}: \yamlvalue{RosMaster}
   \yamlkey{microcontroller}: 
     \yamlkey{id}: \yamlvalue{ros1} 
-    \yamlkey{connectionString}: \yamlvalue{ws://localhost:9090} 
-    \yamlkey{className}: \yamlvalue{DefaultRos4Bdi}
-  \colorbox{yellow}{\yamlkey{perceptionTopics}}:         
+    \yamlkey{connection_string}: \yamlvalue{ws://localhost:9090} 
+    \yamlkey{class_name}: \yamlvalue{DefaultRos4Bdi}
+  \colorbox{yellow}{\yamlkey{perception_topics}}:         
     ...
   \yamlkey{actions}:       
     ...
@@ -1926,6 +2132,9 @@ is specified in a .yaml configuration file\\ \vspace{-.2cm}
   
     the value (e.g.~\texttt{sample\_roshost}) is defined by the developer
     
+    
+     \vfill
+    {\tiny Example available \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/src/agt/robot1.yaml}{here}}
 \end{frame}
 
 
@@ -1945,12 +2154,12 @@ is specified in a .yaml configuration file\\ \vspace{-.2cm}
                 \scriptsize
                 \begin{alltt} \tiny
 - \yamlkey{device\_id}: \yamlvalue{sample\_roshost}
-  \yamlkey{className}: \yamlvalue{RosMaster}
+  \yamlkey{class_name}: \yamlvalue{RosMaster}
   \yamlkey{microcontroller}: 
     \yamlkey{id}: \yamlvalue{ros1} 
-    \yamlkey{connectionString}: \yamlvalue{ws://localhost:9090} 
-    \yamlkey{className}: \yamlvalue{DefaultRos4Bdi}
-  \yamlkey{perceptionTopics}:         
+    \yamlkey{connection_string}: \yamlvalue{ws://localhost:9090} 
+    \yamlkey{class_name}: \yamlvalue{DefaultRos4Bdi}
+  \yamlkey{perception_topics}:         
     ...
   \colorbox{yellow}{\yamlkey{actions}}:       
     ...
@@ -1980,61 +2189,43 @@ is specified in a .yaml configuration file\\ \vspace{-.2cm}
   
     the value (e.g.~\texttt{sample\_roshost}) is defined by the developer
     
+    
+     \vfill
+    {\tiny Example available \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/src/agt/robot1.yaml}{here}}
 \end{frame}
 
 
 \begin{frame}[fragile]{Programming Jason-ROS Robots}{Connecting the agents' abstractions to ROS resources}
 
 \footnotesize
-\colorbox{yellow}{\texttt{{\bf perceptionTopics}}}: %topics managed by the ROS host that produce perceptions \\
+\colorbox{yellow}{\texttt{{\bf perception\_topics}}}: %topics managed by the ROS host that produce perceptions \\
 connects the agents' perception system with\\ 
 
 \vspace{-.47cm}
 
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ the physical/simulated sensors\\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ the physical/simulated sensors\\
 
 \vspace{-.5cm}
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny which produce perceptions that eventually become beliefs}
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny which produce perceptions that eventually become beliefs}
 
+\vspace{.5em}
 
 \begin{block}{{\scriptsize Jason-ROS configuration file}}
-
-
-%\scriptsize
-%\begin{minted}[fontsize=\tiny, linenos,escapeinside=||]{yaml} 
-%- device_id: sample_roshost         
-%     ...
-%  perceptionTopics:         
-%      - topicName: /turtle1/energy
-%        topicType: std_msgs/Int32
-%        beliefName: batteryLevel 
-%      - topicName: /parameter_events
-%        topicType: rcl_interfaces/ParameterEvent
-%        beliefName: known_events
-%        ignoreValues:
-%           - changed_parameters
-%           - deleted_parameters
-%  actions:       
-%     ...
-%    \end{minted}
-    
-\begin{alltt}  \tiny
+\vspace{-.5cm}    
+\begin{alltt}  \scriptsize
 - \yamlkey{device\_id}: \yamlvalue{sample_roshost}         
      ...
-  \colorbox{yellow}{\yamlkey{perceptionTopics}}:         
-      - \yamlkey{topicName}: \yamlvalue{/turtle1/energy}
-        \yamlkey{topicType}: \yamlvalue{std\_msgs/Int32}
-        \yamlkey{beliefName}: \yamlvalue{batteryLevel} 
-      - \yamlkey{topicName}: \yamlvalue{/parameter\_events}
-        \yamlkey{topicType}: \yamlvalue{rcl\_interfaces/ParameterEvent}
-        \yamlkey{beliefName}: \yamlvalue{known\_events}
-        \yamlkey{ignoreValues}:
-           - \yamlvalue{changed\_parameters}
-           - \yamlvalue{deleted\_parameters}
+  \colorbox{yellow}{\yamlkey{perception_topics}}:         
+      - \yamlkey{topic_name}: \yamlvalue{turtle1/pose}
+        \yamlkey{topic_type}: \yamlvalue{turtlesim/Pose}
+        \yamlkey{percept_name}: \yamlvalue{position} 
+      ...
   \yamlkey{actions}:       
      ...    
 \end{alltt}
-\end{block}            
+\end{block}         
+\vfill
+    {\tiny Example available \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/src/agt/robot1.yaml}{here}}
 \end{frame}
 
 
@@ -2044,7 +2235,7 @@ connects the agents' perception system with\\
 
 
 \footnotesize
-\texttt{{\bf perceptionTopics}}: %topics managed by the ROS host that produce perceptions \\
+\texttt{{\bf perception\_topics}}: %topics managed by the ROS host that produce perceptions \\
 connects the agents' perception system with\\ 
 
 \vspace{-.47cm}
@@ -2060,31 +2251,14 @@ connects the agents' perception system with\\
  \column{.49\textwidth}
  
 \begin{block}{{\scriptsize Jason-ROS configuration file}}
-%\footnotesize
-%\begin{minted}[fontsize=\tiny, escapeinside=||]{yaml} 
-%- device_id: sample_roshost         
-%     ...
-%  perceptionTopics:         
-%    - topicName: /turtle1/energy
-%      topicType: std_msgs/Int32
-%      beliefName: batteryLevel 
-%    - topicName: /parameter_events
-%      topicType: rcl_interfaces/ParameterEvent
-%      beliefName: known_events
-%      ignoreValues:
-%        - changed_parameters
-%        - deleted_parameters
-%  actions:       
-%     ...
-%    \end{minted}
 \scriptsize
   \begin{alltt}
 - \yamlkey{device_id}: \yamlvalue{sample_roshost}    
      ...
-  - \colorbox{yellow}{\yamlkey{perceptionTopics}}:     
-    - \yamlkey{topicName}: \yamlvalue{/turtle1/energy}
-      \yamlkey{topicType}: \yamlvalue{std_msgs/Int32}
-      \yamlkey{beliefName}: \yamlvalue{batteryLevel} 
+  - \colorbox{yellow}{\yamlkey{perception_topics}}:     
+    - \yamlkey{topic_name}: \yamlvalue{/turtle1/energy}
+      \yamlkey{topic_type}: \yamlvalue{std_msgs/msg/Int32}
+      \yamlkey{percept_name}: \yamlvalue{batteryLevel} 
      ...
   \end{alltt}
 \end{block}  
@@ -2093,8 +2267,8 @@ connects the agents' perception system with\\
  \scriptsize
  \begin{itemize}
   \item each item specifies a connection between a topic and a perception/belief
-  \item the keys \yamlkey{topicName} and \yamlkey{topicType} have an intuitive meaning   
-  \item \yamlkey{beliefName}: name (or \textit{functor}) of the produced perception  
+  \item the keys \yamlkey{topic\_name} and \yamlkey{topic\_type} have an intuitive meaning   
+  \item \yamlkey{percept\_name}: name (or \textit{functor}) of the produced percept  
   %\item \texttt{ignoreValues}: topic fields to be ignored
  \end{itemize}
 
@@ -2102,17 +2276,8 @@ connects the agents' perception system with\\
  
  
 \end{columns}
-
-%\scriptsize
-%\vspace{.3cm}
-
-%By default, the produced perception has the form $b(f_1,\cdots,f_n)$, where (i) $b$ is the \texttt{beliefName} and $(f_1,\cdots,f_n)$ are the $n$ fields recorded in the topic, excluding those listed under the \texttt{ignoreValues} key.\\
-
-% \vfill
-%{\fontsize{4}{4.8}\selectfont Go to \textcolor{blue}{\underline{\href{https://github.com/embedded-mas/jason-ros-course-wesaac2024/blob/main/README.adoc#task-3-1-configuring-perceptions}{Task 3.1}}} -- Exercises 3.1.1 to 3.1.3}
-%{\fontsize{4}{4.8}\selectfont
-%    Go to \href{https://github.com/embedded-mas/jason-ros-course-wesaac2024/blob/main/README.adoc#task-3-1-configuring-perceptions}{\textcolor{blue}{\underline{Task 3.1}}} --- Exercises 3.1.1 to 3.1.3
-%}
+\vfill
+    {\tiny Example available \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/src/agt/robot1.yaml}{here}}
 \end{frame}
 
 
@@ -2121,7 +2286,7 @@ connects the agents' perception system with\\
 
 
 \footnotesize
-By default, if the topic value has a single field, the produced perception has the form $b(v)$, where (i) $b$ is the \yamlkey{beliefName} and $v$ is field value.
+By default, if the topic value has a single field, the produced perception has the form $p(v)$, where (i) $p$ is the \yamlkey{percept\_name} and $v$ is the field value.
 
 \vspace{.5cm}
 
@@ -2129,54 +2294,34 @@ By default, if the topic value has a single field, the produced perception has t
  \column{.49\textwidth}
  
 \begin{block}{{\scriptsize Jason-ROS configuration file}}
-%\footnotesize
-%\begin{minted}[fontsize=\tiny, escapeinside=||]{yaml} 
-%- device_id: sample_roshost         
-%     ...
-%  perceptionTopics:         
-%    - topicName: /turtle1/energy
-%      topicType: std_msgs/Int32
-%      beliefName: batteryLevel 
-%    - topicName: /parameter_events
-%      topicType: rcl_interfaces/ParameterEvent
-%      beliefName: known_events
-%      ignoreValues:
-%        - changed_parameters
-%        - deleted_parameters
-%  actions:       
-%     ...
-%    \end{minted}
+
 \scriptsize
   \begin{alltt}
 - \yamlkey{device_id}: \yamlvalue{sample_roshost}    
      ...
-  - \colorbox{yellow}{\yamlkey{perceptionTopics}}:     
-    - \yamlkey{topicName}: \yamlvalue{/turtle1/energy}
-      \yamlkey{topicType}: \yamlvalue{std_msgs/Int32}
-      \yamlkey{beliefName}: \yamlvalue{batteryLevel} 
+  - \colorbox{yellow}{\yamlkey{perception_topics}}:     
+    - \yamlkey{topic_name}: \yamlvalue{/turtle1/energy}
+      \yamlkey{topic_type}: \yamlvalue{std_msgs/msg/Int32}
+      \yamlkey{percept_name}: \yamlvalue{battery_level} 
      ...
   \end{alltt}
 \end{block}  
 
  \column{.45\textwidth}
  \scriptsize
- \textcolor{cyan}{e.g.}: if the value recorded in the topic \yamlkey{/turtle1/energy} is 100, then the agent has the belief \textit{batteryLevel(100)}
+ \textcolor{cyan}{e.g.}: if the value recorded in the topic \yamlkey{/turtle1/energy} is 100, then the agent has the belief \textit{battery\_level(100)}
 
+ \vspace{3em}
  
+ \tiny This is the case of the primitive ROS data types:
+ \texttt{std\_msgs/msg/<TYPE>} s.t. \\\texttt{TYPE }$\in$\ \{Int32,Bool, Byte, Char, Float32, Float64, Int8, UInt8, Int16, UInt16, UInt32, Int64, UInt64, String, WString\}
  
  
 \end{columns}
 
-%\scriptsize
-%\vspace{.3cm}
+\vfill
+    {\tiny Example available \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/src/agt/robot1.yaml}{here}}
 
-%By default, the produced perception has the form $b(f_1,\cdots,f_n)$, where (i) $b$ is the \texttt{beliefName} and $(f_1,\cdots,f_n)$ are the $n$ fields recorded in the topic, excluding those listed under the \texttt{ignoreValues} key.\\
-
-% \vfill
-%{\fontsize{4}{4.8}\selectfont Go to \textcolor{blue}{\underline{\href{https://github.com/embedded-mas/jason-ros-course-wesaac2024/blob/main/README.adoc#task-3-1-configuring-perceptions}{Task 3.1}}} -- Exercises 3.1.1 to 3.1.3}
-%{\fontsize{4}{4.8}\selectfont
-%    Go to \href{https://github.com/embedded-mas/jason-ros-course-wesaac2024/blob/main/README.adoc#task-3-1-configuring-perceptions}{\textcolor{blue}{\underline{Task 3.1}}} --- Exercises 3.1.1 to 3.1.3
-%}
 \end{frame}
 
 
@@ -2186,38 +2331,21 @@ By default, if the topic value has a single field, the produced perception has t
 
 
 \footnotesize
-By default, if the topic value has $n$ fields (s.t.~$n>1$), the produced perception has the form $b(f_1(v_{f_1}),\cdots,f_n(v_{f_n}))$, where (i) $b$ is the \yamlkey{beliefName}, (ii) $(f_i)$ is the name of the $i^{th}$ field, and (iii) $v_{f_i}$ is the value of the $i^{th}$ field.
+By default, if the topic value has $n$ fields (s.t.~$n>1$), the produced perception has the form $p(f_1(v_{f_1}),\cdots,f_n(v_{f_n}))$, where (i) $p$ is the \yamlkey{percept\_name}, (ii) $(f_i)$ is the name of the $i^{th}$ field, and (iii) $v_{f_i}$ is the value of the $i^{th}$ field.
 \vspace{.5cm}
 
 \begin{columns}
  \begin{column}{.43\textwidth}
  
 \begin{block}{{\scriptsize Jason-ROS configuration file}}
-%\footnotesize
-%\begin{minted}[fontsize=\tiny, escapeinside=||]{yaml} 
-%- device_id: sample_roshost         
-%     ...
-%  perceptionTopics:         
-%    - topicName: /turtle1/energy
-%      topicType: std_msgs/Int32
-%      beliefName: batteryLevel 
-%    - topicName: /parameter_events
-%      topicType: rcl_interfaces/ParameterEvent
-%      beliefName: known_events
-%      ignoreValues:
-%        - changed_parameters
-%        - deleted_parameters
-%  actions:       
-%     ...
-%    \end{minted}
 \scriptsize
   \begin{alltt}
 - \yamlkey{device_id}: \yamlvalue{sample_roshost}    
      ...
-  - \colorbox{yellow}{\yamlkey{perceptionTopics}}:     
-    - \yamlkey{topicName}: \yamlvalue{/turtle1/energy}
-      \yamlkey{topicType}: \yamlvalue{std_msgs/Int32}
-      \yamlkey{beliefName}: \yamlvalue{energyStatus} 
+  - \colorbox{yellow}{\yamlkey{perception\_topics}}:     
+    - \yamlkey{topic\_name}: \yamlvalue{/turtle1/pose}
+      \yamlkey{topic\_type}: \yamlvalue{turtlesim/Pose}
+      \yamlkey{percept\_name}: \yamlvalue{position} 
      ...
   \end{alltt}
 \end{block}  
@@ -2229,27 +2357,37 @@ By default, if the topic value has $n$ fields (s.t.~$n>1$), the produced percept
 
  \begin{column}{.52\textwidth}
  \scriptsize
- \textcolor{cyan}{e.g.}: if the topic \yamlkey{/turtle1/energy} has the fields \textit{batteryLevel} and \textit{remainingTime}, then the agent has the belief\\ \textit{energyStatus(batteryLevel(100),remainingTime(60))}
+ \textcolor{cyan}{e.g.}: the topic \yamlkey{/turtle1/pose} has the fields \texttt{x}, \texttt{y}, \texttt{theta}, \texttt{linear\_velocity}, and \texttt{angular\_velocity}. The corresponding percept values is\\ \textit{position(x(X),y(Y),theta(T),\\ \ \ \ \ \ \ \ \ \ linear\_velocity(L),angular\_velocity(A))}
 
  
  \end{column}
  
 \end{columns}
 
-%\scriptsize
-%\vspace{.3cm}
+\vfill
+    {\tiny Example available \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/src/agt/robot1.yaml}{here}}
 
-%By default, the produced perception has the form $b(f_1,\cdots,f_n)$, where (i) $b$ is the \texttt{beliefName} and $(f_1,\cdots,f_n)$ are the $n$ fields recorded in the topic, excluding those listed under the \texttt{ignoreValues} key.\\
-
-% \vfill
-%{\fontsize{4}{4.8}\selectfont Go to \textcolor{blue}{\underline{\href{https://github.com/embedded-mas/jason-ros-course-wesaac2024/blob/main/README.adoc#task-3-1-configuring-perceptions}{Task 3.1}}} -- Exercises 3.1.1 to 3.1.3}
-%{\fontsize{4}{4.8}\selectfont
-%    Go to \href{https://github.com/embedded-mas/jason-ros-course-wesaac2024/blob/main/README.adoc#task-3-1-configuring-perceptions}{\textcolor{blue}{\underline{Task 3.1}}} --- Exercises 3.1.1 to 3.1.3
-%}
 \end{frame}
 
 
 
+\begin{frame}[fragile]{Programming Jason-ROS Robots}{Connecting the agents' abstractions to ROS resources}
+
+{\bf Exercise}
+
+\vspace{2em}
+
+Run the \link{https://github.com/issia-2026-jason-ros/turtle-example}{turtle example}. \\
+
+\vspace{1em}
+
+Then, open the mind inspector$^*$ and observe the beliefs acquired from the perceptions configured in the \link{https://github.com/issia-2026-jason-ros/turtle-example/blob/master/src/agt/robot1.yaml}{.yaml file}.
+
+\vspace{3em}
+\tiny
+$^*$ Usually available at \link{http://localhost:3272}{http://localhost:3272}
+
+\end{frame}
 
 
 
@@ -2257,7 +2395,7 @@ By default, if the topic value has $n$ fields (s.t.~$n>1$), the produced percept
 
 
 \footnotesize
-In multi-field topics, the key \colorbox{cyan}{\yamlkey{ignoreValues}} specifies topic fields that do not belong to the belief.
+In multi-field topics, the key \colorbox{yellow}{\yamlkey{ignore\_values}} specifies topic fields that do not belong to the percept.
 
 \vspace{.5cm}
 
@@ -2268,33 +2406,40 @@ In multi-field topics, the key \colorbox{cyan}{\yamlkey{ignoreValues}} specifies
   \begin{alltt}
 - \yamlkey{device_id}: \yamlvalue{sample_roshost}    
      ...
-  - \colorbox{yellow}{\yamlkey{perceptionTopics}}:     
-    - \yamlkey{topicName}: \yamlvalue{/parameter_events}
-      \yamlkey{topicType}: \yamlvalue{rcl_interfaces/ParameterEvent}
-      \yamlkey{beliefName}: \yamlvalue{known_events} 
-     \colorbox{cyan}{\yamlkey{ignoreValues}}:
-        - \colorbox{yellow}{\yamlvalue{changed_parameters}}
-        - \colorbox{yellow}{\yamlvalue{deleted_parameters}}
-     ...
+  -   \yamlkey{perception\_topics}:     
+    - \yamlkey{topic\_name}: \yamlvalue{/turtle1/pose}
+      \yamlkey{topic\_type}: \yamlvalue{turtlesim/Pose}
+      \yamlkey{percept\_name}: \yamlvalue{position} 
+      \colorbox{yellow}{\yamlkey{ignore\_values}}:
+         \yamlvalue{- theta}
   \end{alltt}
 \end{block}  
 
  \column{.48\textwidth}
  \scriptsize
- \textcolor{cyan}{e.g.}: the topic \yamlkey{/parameter\_events} has 5 fields: {\tiny $f_1$=\texttt{stamp}, $f_2$=\texttt{node}, $f_3$=\texttt{new\_parameters}, $f_4$=\texttt{changed\_parameters}, $f_5$=\texttt{deleted\_parameters}}
- \begin{itemize}
-  \item if the key \colorbox{cyan}{\yamlkey{ignoreValues}} is omitted, the corresponding belief is ${known\_events(f_1,f_2,f_3,f_4,f_5)}$.
-  \item otherwise, the corresponding belief is ${known\_events(f_1,f_2,f_3)}$.
- \end{itemize}
+%  \textcolor{cyan}{e.g.}: the topic \yamlkey{/turtle1/pose} has the fields \texttt{x}, \texttt{y}, \texttt{theta}, \texttt{linear\_velocity}, and \texttt{angular\_velocity}. The field \texttt{theta} is ignored. Then, corresponding percept values is\\ \textit{position(x(X),y(Y), linear\_velocity(L),angular\_velocity(A))}
+%  
+ 
+\textcolor{cyan}{e.g.}: the message \yamlvalue{turtlesim/Pose} has the following structure:
 
- 
+\begin{grayblock}[0.65\linewidth]
+ \tiny
+ \vspace{-2em}
+\begin{alltt}
+float32 x
+float32 y
+float32 theta
+float32 linear_velocity
+float32 angular_velocity
+\end{alltt}
+\end{grayblock}
 
- 
- 
- 
+Ignoring the field \texttt{theta} produces the following percept:\\
+\vspace{5pt}
+\textit{position(x(X),y(Y), linear\_velocity(L),\\ \ \ \ \ \ \ \ \ \ \ \ angular\_velocity(A))}
+
+
 \end{columns}
-
-
 \vfill
 
 {\tiny Customizations in ROS-based beliefs are discussed later in this course}
@@ -2305,11 +2450,30 @@ In multi-field topics, the key \colorbox{cyan}{\yamlkey{ignoreValues}} specifies
 
 \begin{frame}[fragile]{Programming Jason-ROS Robots}{Connecting the agents' abstractions to ROS resources}
 
+{\bf Exercise}
+
+\vspace{2em}
+
+Change the \link{https://github.com/issia-2026-jason-ros/turtle-example}{turtle example} to acquire the percept \texttt{position(x(X),y(Y))} from the topic \texttt{turtle1/pose}.
+
+\vspace{1em}
+
+Run the new version and observe the mind inspector$^*$.
+
+\vspace{3em}
+\tiny
+$^*$ Usually available at \link{http://localhost:3272}{http://localhost:3272}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Programming Jason-ROS Robots}{Connecting the agents' abstractions to ROS resources}
+
 
 \footnotesize
 Nested fields to be ignored are chained with a ``{\Large{\bf\texttt{.}}}''
 
-\vspace{.5cm}
+%\vspace{.5cm}
 
 \begin{columns}
  \column{.49\textwidth}
@@ -2319,10 +2483,10 @@ Nested fields to be ignored are chained with a ``{\Large{\bf\texttt{.}}}''
   \begin{alltt}
 - \yamlkey{device_id}: \yamlvalue{sample_roshost}    
      ...
-  - \colorbox{yellow}{\yamlkey{perceptionTopics}}:     
-    - \yamlkey{topicName}: \yamlvalue{turtle1/cmd_vel}
-      \yamlkey{topicType}: \yamlvalue{geometry_msgs/Twist}
-      \yamlkey{beliefName}: \yamlvalue{velocity} 
+  - \colorbox{yellow}{\yamlkey{perception_topics}}:     
+    - \yamlkey{topic_name}: \yamlvalue{turtle1/cmd_vel}
+      \yamlkey{topic_type}: \yamlvalue{geometry_msgs/Twist}
+      \yamlkey{percept\_name}: \yamlvalue{velocity} 
      \colorbox{cyan}{\yamlkey{ignoreValues}}:
         - \colorbox{yellow}{\yamlvalue{linear.z}}
         - \colorbox{yellow}{\yamlvalue{angular}}
@@ -2332,8 +2496,14 @@ Nested fields to be ignored are chained with a ``{\Large{\bf\texttt{.}}}''
 
  \column{.48\textwidth}
  \scriptsize
+ \vspace{.5cm}
+ 
  \textcolor{cyan}{e.g.}: the message \yamlvalue{geometry\_msgs/Twist} has the follwing structure:
+ %\begin{center}
+ 
+ \begin{grayblock}[0.65\linewidth]
  \tiny
+ \vspace{-2em}
    \begin{alltt}   
 geometry_msgs/Vector3 linear
   float64 x  
@@ -2344,27 +2514,84 @@ geometry_msgs/Vector3 angular
   float64 y  
   float64 z  
    \end{alltt}
+\vspace{-2em}
+ \end{grayblock}
+%\end{center}
 
  \scriptsize
  
  \begin{itemize}
   \item ignoring the field \yamlvalue{angular} implies to ignore \texttt{angular.x}, \texttt{angular.y}, and \texttt{angular.z}
   \item to ignore the field \texttt{z} nested in \texttt{linear}, the ignore value is set to \yamlvalue{linear.z}
+  \item corresponding percept: \textit{velocity(linear(x(X),y(Y))}
  \end{itemize}
-
- 
-
- 
- 
- 
+    
 \end{columns}
 
+\vfill
+Example available {\tiny \link{https://github.com/embedded-mas/cp-bdi-by-example/blob/main/ros/ignoreValues}{here}}
 
 
 \end{frame}
 
+\begin{frame}[fragile]{Programming Jason-ROS Robots}{Connecting the agents' abstractions to ROS resources}
+
+\footnotesize
+
+{\bf Perception rules}\\
+Allow to build perceptions that are not just a translation of topic values.
 
 
+\begin{columns}
+ \column{.49\textwidth}
+ 
+\begin{block}{{\scriptsize Jason-ROS configuration file}}
+\ssmall
+  \begin{alltt}
+- \yamlkey{device_id}: \yamlvalue{sample_roshost}    
+     ...
+  -   \yamlkey{perception\_topics}:     
+    - \yamlkey{topic\_name}: \yamlvalue{/turtle1/pose}
+      \yamlkey{topic\_type}: \yamlvalue{turtlesim/Pose}
+      \yamlkey{percept\_name}: \yamlvalue{position} 
+     ...  
+- \yamlkey{perception_rules}:
+   \yamlvalue{- position(X,Y) :-
+       turtle_position(x(X),y(Y), theta(T),
+                       linear_velocity(LV),
+                       angular_velocity(AV)).}      
+  \end{alltt}
+\end{block}  
+
+ \column{.48\textwidth}
+ \scriptsize
+%  \textcolor{cyan}{e.g.}: the topic \yamlkey{/turtle1/pose} has the fields \texttt{x}, \texttt{y}, \texttt{theta}, \texttt{linear\_velocity}, and \texttt{angular\_velocity}. The field \texttt{theta} is ignored. Then, corresponding percept values is\\ \textit{position(x(X),y(Y), linear\_velocity(L),angular\_velocity(A))}
+%  
+ 
+\textcolor{cyan}{e.g.}: the message \yamlvalue{turtlesim/Pose} has the following structure:
+
+\begin{grayblock}[0.65\linewidth]
+ \tiny
+ \vspace{-2em}
+\begin{alltt}
+float32 x
+float32 y
+float32 theta
+float32 linear_velocity
+float32 angular_velocity
+\end{alltt}
+\end{grayblock}
+
+Default percept:\\
+\vspace{5pt}
+\textit{position(x(X),y(Y),theta(T),\\ \ \ \ \ linear\_velocity(L),angular\_velocity(A))}
+
+Produced percept:\\
+\textit{position(X,Y)}
+
+\end{columns}
+
+\end{frame}
 
 
 \begin{frame}[fragile]{Programming Jason-ROS Robots}{Connecting the agents' abstractions to ROS resources}
@@ -2388,9 +2615,9 @@ geometry_msgs/Vector3 angular
 - \yamlkey{device_id}: \yamlvalue{sample_roshost}
      ...
   \colorbox{yellow}{\yamlkey{actions}}:   
-     \colorbox{green}{\yamlkey{topicWritingActions}}:  
+     \colorbox{green}{\yamlkey{topic_writing_actions}}:  
         ...
-     \colorbox{pink}{\yamlkey{serviceRequestActions}}:
+     \colorbox{pink}{\yamlkey{service_request_actions}}:
         ...
  
 \end{alltt}
@@ -2404,11 +2631,11 @@ geometry_msgs/Vector3 angular
  \begin{column}{.5\textwidth}
  \scriptsize
  \begin{itemize}
-  \item \colorbox{green}{\yamlkey{topicWritingActions}}:\\ actions realized through topic writings  
+  \item \colorbox{green}{\yamlkey{topic\_writing\_actions}}:\\ actions realized through topic writings  
   
   \vspace{.3cm}
   
-  \item \colorbox{pink}{\yamlkey{serviceRequestActions}}:\\ actions realized through service requests
+  \item \colorbox{pink}{\yamlkey{service\_request\_actions}}:\\ actions realized through service requests
  \end{itemize}
 
   \end{column}
@@ -2438,26 +2665,27 @@ geometry_msgs/Vector3 angular
      ...
   \yamlkey{actions}:        
         ...
-     \yamlkey{serviceRequestActions}:
-        - \colorbox{yellow}{\yamlkey{actionName}}: recharge_battery
-          \yamlkey{serviceName}: /turtle1/do_recharge
+     \yamlkey{service_request_actions}:
+        - \colorbox{yellow}{\yamlkey{action_name}}: move_robot
+          \yamlkey{service_name}: /turtle1/teleport_relative
           \yamlkey{params}:
-             - time
+             - linear
+             - angular
 \end{alltt}
     
 \end{block}  
 
- \colorbox{yellow}{\texttt{actionName}}: name of the action in the agent's repertory\\
+ \colorbox{yellow}{\texttt{action\_name}}: name of the action in the agent's repertory\\
  
   \vspace{-.5cm}
  
 
  
- \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny in this case, the agent's action repertory includes an action \texttt{recharge\_battery}}\\
+ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny in this case, the agent's action repertory includes the action \texttt{move\_robot}}\\
  
  \vspace{-.5cm}
  
- \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny \colorbox{yellow}{\texttt{actionName}} is not necessarily related to hardware specifics}\\
+ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny \colorbox{yellow}{\texttt{action\_name}} is not necessarily related to hardware specifics}\\
  
   \vspace{-.5cm}
  
@@ -2479,14 +2707,7 @@ geometry_msgs/Vector3 angular
 
 
 \footnotesize
-%{\bf Service-based actions}: actions realized through service requests\\
-%
-%\vspace{-.5cm}
-%\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ %{\tiny controlled by ROS topics and services}
-    
 
-%\begin{columns}
-% \column{.48\textwidth}
  
 \begin{block}{Jason-ROS configuration file}
 
@@ -2497,31 +2718,26 @@ geometry_msgs/Vector3 angular
      ...
   \yamlkey{actions}:        
         ...
-     \yamlkey{serviceRequestActions}:
-        - \yamlkey{actionName}: recharge_battery
-          \colorbox{yellow}{\yamlkey{serviceName}}: /turtle1/do_recharge
+     \yamlkey{service_request_actions}:
+        - \yamlkey{action_name}: move_robot
+          \colorbox{yellow}{\yamlkey{service_name}}: /turtle1/teleport_relative
           \yamlkey{params}:
-             - time
-             - charging_current
+             - linear
+             - angular
 \end{alltt}
     
 \end{block}  
-% \column{.45\textwidth}
-% \scriptsize
-% \begin{itemize}
-%  \item \yamlkey{topicWritingActions}: actions realized through topic writings  
-%  \item \yamlkey{serviceRequestActions}: actions realized through service requests
-% \end{itemize}
+
 
  
- \colorbox{yellow}{\texttt{serviceName}}: name of the ROS service that actually realizes that action\\
+ \colorbox{yellow}{\texttt{service\_name}}: name of the ROS service that actually realizes that action\\
  
  \vspace{-.5cm}
  
- \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny in this case, the agent's action \texttt{recharge\_battery}}\\ 
+ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny in this case, the agent's action \texttt{move\_robot}}\\ 
  
  \vspace{-.5cm}
- \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny is realized through the service \texttt{/turtle1/do\_recharge}}\\ 
+ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny is realized through the service \texttt{/turtle1/teleport\_relative}}\\ 
  
  \vspace{-.5cm}
  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny (which is supposed to control some actuator).}
@@ -2539,14 +2755,7 @@ geometry_msgs/Vector3 angular
 
 
 \footnotesize
-%{\bf Service-based actions}: actions realized through service requests\\
-%
-%\vspace{-.5cm}
-%\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ %{\tiny controlled by ROS topics and services}
-    
 
-%\begin{columns}
-% \column{.48\textwidth}
  
 \begin{block}{Jason-ROS configuration file}
 
@@ -2557,24 +2766,18 @@ geometry_msgs/Vector3 angular
      ...
   \yamlkey{actions}:        
         ...
-     \yamlkey{serviceRequestActions}:
-        - \yamlkey{actionName}: recharge_battery
-          \yamlkey{serviceName}: /turtle1/do_recharge
+     \yamlkey{service_request_actions}:
+        - \yamlkey{action_name}: move_robot
+          \yamlkey{service_name}: /turtle1/teleport_relative
           \colorbox{yellow}{\yamlkey{params}}:
-             - time
-             - charging_current
+             - linear
+             - angular
 \end{alltt}
+
     
 \end{block}  
-% \column{.45\textwidth}
-% \scriptsize
-% \begin{itemize}
-%  \item \yamlkey{topicWritingActions}: actions realized through topic writings  
-%  \item \yamlkey{serviceRequestActions}: actions realized through service requests
-% \end{itemize}
 
- 
- \colorbox{yellow}{\texttt{params}}: list of parameters required by the service call\\
+ \colorbox{yellow}{\texttt{params}}: list of parameters required by the service request\\
  
  \vspace{-.5cm}
  \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny the parameters list must be the same as the service specification}\\ 
@@ -2627,12 +2830,12 @@ Assumption: these actions belong to the agent implementation\\
      ...
   \yamlkey{actions}:        
         ...
-     \yamlkey{serviceRequestActions}:
-        - \yamlkey{actionName}: \colorbox{yellow}{recharge_battery}
-          \yamlkey{serviceName}: /turtle1/do_recharge
+     \yamlkey{service_request_actions}:
+        - \yamlkey{action_name}: \colorbox{yellow}{move_robot}
+          \yamlkey{service_name}: /turtle1/teleport_relative
           \yamlkey{params}:
-             - \colorbox{green}{time}
-             - \colorbox{cyan}{charging_current}
+             - \colorbox{green}{linear}
+             - \colorbox{cyan}{angular}
 \end{alltt}
     
 \end{block}  
@@ -2650,7 +2853,7 @@ Assumption: these actions belong to the agent implementation\\
 
  +\planhead{triggering\_event} : \belief{context}
     <- \instruction{...}
-       \instruction{.\colorbox{yellow}{recharge_battery}(\colorbox{green}{30}, \colorbox{cyan}{600}});
+       \instruction{.\colorbox{yellow}{move_robot}(\colorbox{green}{3}, \colorbox{cyan}{5}});
        \instruction{...}
        
        
@@ -2677,7 +2880,7 @@ Assumption: these actions belong to the agent implementation\\
 \footnotesize
 
 \begin{block}{Jason-ROS configuration file}
-
+\vspace{-1em}
 
 \scriptsize
 \begin{alltt}\ssmall
@@ -2685,10 +2888,10 @@ Assumption: these actions belong to the agent implementation\\
      ...
   \yamlkey{actions}:        
         ...
-    \yamlkey{topicWritingActions}:          
-      - \colorbox{yellow}{\yamlkey{actionName}}: move_robot
-        \colorbox{green}{\yamlkey{topicName}}: /turtle1/cmd_vel
-        \colorbox{pink}{\yamlkey{topicType}}: geometry_msgs/Twist 
+    \yamlkey{topic_writing_actions}:          
+      - \colorbox{yellow}{\yamlkey{action_name}}: move_robot
+        \colorbox{green}{\yamlkey{topic_name}}: /turtle1/cmd_vel
+        \colorbox{pink}{\yamlkey{topic_type}}: geometry_msgs/Twist 
         \yamlkey{params}:
            - linear:
               - x
@@ -2699,12 +2902,12 @@ Assumption: these actions belong to the agent implementation\\
               - y
               - z     
 \end{alltt}
-    
+\vspace{-1em}    
 \end{block}  
 
 \scriptsize
 
- \colorbox{yellow}{\texttt{actionName}}: name of the action in the agent's repertory\\
+ \colorbox{yellow}{\texttt{action\_name}}: name of the action in the agent's repertory\\
  
   \vspace{-.45cm}
  
@@ -2714,7 +2917,7 @@ Assumption: these actions belong to the agent implementation\\
  
  \vspace{-.45cm}
  
- \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny \colorbox{yellow}{\texttt{actionName}} is not necessarily related to hardware specifics}\\
+ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\tiny \colorbox{yellow}{\texttt{action\_name}} is not necessarily related to hardware specifics}\\
  
   \vspace{-.45cm}
  
@@ -2727,7 +2930,7 @@ Assumption: these actions belong to the agent implementation\\
  
  \vspace{-.3cm}
  
- \colorbox{green}{\texttt{topicName}} and \colorbox{pink}{\texttt{topicType}} have intuitive meaning
+ \colorbox{green}{\texttt{topic\_name}} and \colorbox{pink}{\texttt{topic\_type}} have intuitive meaning
 
 \end{frame}
 
