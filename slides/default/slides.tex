@@ -20,12 +20,19 @@
 
 \usepackage{animate}
 
-\usepackage[ruled]{algorithm2e}
-\SetKwBlock{When}{when}{end\_when}
+\usepackage{algorithmic}
+% \makeatletter
+% \renewcommand{\ALC@lno}{\tiny\arabic{ALC@line}:}
+% \makeatother
+
+%\usepackage[ruled]{algorithm2e}
+%\SetKwBlock{When}{when}{end\_when}
 
 \usepackage{xcolor}
 
 \usepackage{minted}
+
+
 
 \newcommand{\countasconf}{\langle  R_{e}, R_{s}, D, \mathcal{E}, \mathcal{N}, \mathcal{I},\mathcal{T}\rangle}
 \newcommand{\jacamo}{$\mathsf{JaCaMo}$\xspace}
@@ -49,21 +56,21 @@
 
 \input{style-w}
 
-%[Maiquel] *** commands for SAI spec. ***
-\SetKw{kwCountas}{count-as}
-\SetKw{kwWhen}{when}
-\SetKw{kwWhile}{while}
-\SetKw{kwStatusFunctions}{status\_functions}
-\SetKw{kwCrules}{constitutive\_rules}
-\SetKw{kwAgents}{agents}
-\SetKw{kwEvents}{events}
-\SetKw{kwStates}{states}
-\SetKw{kwNorms}{norms}
-\SetKw{kwObl}{obliged}
-\SetKw{kwProhib}{prohibited}
-\SetKw{kwPermitt}{permitted}
-\SetKw{kwElse}{else}
-\newcommand{\saicomment}[1]{\textcolor{olive}{/* #1 */}}
+% [Maiquel] *** commands for SAI spec. ***
+% \SetKw{kwCountas}{count-as}
+% \SetKw{kwWhen}{when}
+% \SetKw{kwWhile}{while}
+% \SetKw{kwStatusFunctions}{status\_functions}
+% \SetKw{kwCrules}{constitutive\_rules}
+% \SetKw{kwAgents}{agents}
+% \SetKw{kwEvents}{events}
+% \SetKw{kwStates}{states}
+% \SetKw{kwNorms}{norms}
+% \SetKw{kwObl}{obliged}
+% \SetKw{kwProhib}{prohibited}
+% \SetKw{kwPermitt}{permitted}
+% \SetKw{kwElse}{else}
+% \newcommand{\saicomment}[1]{\textcolor{olive}{/* #1 */}}
 
 \newcommand{\yamlkey}[1]{\textcolor{red}{\texttt{#1}}}
 \newcommand{\yamlvalue}[1]{\textcolor{blue}{\texttt{#1}}}
@@ -179,9 +186,9 @@
     \end{itemize}
 
     
-    \vfill
-    
- {\tiny Practical activities are available \link{https://github.com/embedded-mas/jason-ros-course-wesaac2024/blob/main/README.adoc}{here}} 
+%     \vfill
+%     
+%  {\tiny Practical activities are available \link{https://github.com/embedded-mas/jason-ros-course-wesaac2024/blob/main/README.adoc}{here}} 
 
  
  
@@ -1527,9 +1534,77 @@ Jason-ROS
  \end{itemize}
 
 \end{itemize}
-
  
 \end{frame}
+
+
+\begin{frame}{Autonomous robots with BDI agents and ROS}
+ 
+ \begin{figure}
+ \centering
+ \includegraphics[scale=.2]{../figs/jason-ros-agent-russel-norvig.pdf}  
+ \caption{{\tiny Image adapted from~\cite{russel1995}}}
+\end{figure}
+ 
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Autonomous robots with BDI agents and ROS\\{\tiny Adding ROS resources to the BDI control cycle}}
+
+  \begin{columns}
+    \column{.6\textwidth}
+     \ssmall
+    \begin{algorithmic}[1]
+    \STATE B $\gets$ $B_0$\;
+    \STATE I $\gets$ $I_0$\;
+    \WHILE{true}
+        \STATE \colorbox{cyan}{get next percept $\rho$ through $see(...)$ function}\;
+        \STATE B $\gets$ brf(B, $\rho$)\;
+        \STATE D $\gets$ options(B,I)\;
+        \STATE I $\gets$ filter(B,D,I)\;
+        \STATE $\pi$ $\gets$ plan(B,I,Ac)\;
+        \WHILE{not (empty($\pi$) or succeeded(I,B) or impossible(I,B))}
+            \STATE $\alpha \gets$ head($\pi$)\;
+            \STATE \colorbox{yellow}{execute($\alpha$)}\;
+            \STATE $\pi$ $\gets$ tail($\pi$)\;
+            \STATE \colorbox{cyan}{get next percept $\rho$ through see(...) function}\;
+            \STATE B $\gets$ brf(B, $\rho$)\;
+            \IF {reconsider(I,D)}
+                \STATE D $\gets$ options(B,I)\;
+                \STATE I $\gets$ filter(B,D,I)\;
+            \ENDIF
+            \IF {not sound($\pi$,I,B)}
+                \STATE $\pi$ $\gets$ plan(B,I,Ac)\;
+            \ENDIF
+    \ENDWHILE
+    \ENDWHILE
+    \end{algorithmic}
+
+    
+    \column{.4\textwidth}
+    
+        \begin{figure}
+            \centering
+              \includegraphics[scale=.08]{../figs/perceive_plan_act.png}
+         \end{figure}
+         
+         
+   \footnotesize     
+   {\bf Perceive: }\\ include sensor values recorded in ROS topics
+   
+   {\bf Act: }\\ write actuation instructions in topics or request services
+      
+
+  \end{columns}
+
+
+  
+   
+    
+
+\end{frame}
+
 
 
 \begin{frame}{Autonomous robots with Jason and ROS}
@@ -1550,31 +1625,6 @@ Programming Jason-ROS robots requires to connect
 
 
 
-\begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
- 
- {\bf Embedded-MAS framework}: \vspace{.2cm}
- 
- \vspace{.5cm}
- 
- \begin{columns}
-    \column{.4\textwidth}
-    
-   \begin{itemize} \scriptsize
-    \item integrate Jason agents with physical devices \vspace{.2cm}
-    \item multiple, extensible interfaces (e.g.ROS, serial)\vspace{.2cm}
-    \item \url{https://github.com/embedded-mas/embedded-mas}
-   \end{itemize}
- 
-    \column{.6\textwidth}
-    \begin{figure}
- \centering
- \includegraphics[scale=.11]{../figs/jason-ros-agent-russel-norvig.pdf}
- \caption{{\tiny Image adapted from~\cite{russel1995}}}
-\end{figure}
- 
- \end{columns}
-\end{frame}
-
 
 \begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
  
@@ -1582,52 +1632,68 @@ Programming Jason-ROS robots requires to connect
  
  \vspace{.5cm}
  
- \begin{columns}
-    \column{.4\textwidth}
-    
-   \begin{itemize} \scriptsize
+%  \begin{columns}
+%     \column{.4\textwidth}
+%     
+   \begin{itemize}
     \item integrate Jason agents with physical devices \vspace{.2cm}
     \item multiple, extensible interfaces (e.g.ROS, serial)\vspace{.2cm}
     \item \url{https://github.com/embedded-mas/embedded-mas}
    \end{itemize}
  
-    \column{.6\textwidth}
-    \begin{figure}
- \centering
- \includegraphics[scale=.25]{../figs/embedded_mas_overall_arhiteture-microcontroller.png}
-\end{figure}
- 
- \end{columns}
+%     \column{.6\textwidth}
+%     \begin{figure}
+%  \centering
+%  \includegraphics[scale=.11]{../figs/jason-ros-agent-russel-norvig.pdf}
+%  \caption{{\tiny Image adapted from~\cite{russel1995}}}
+% \end{figure}
+%  
+%  \end{columns}
 \end{frame}
 
 
+\begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
+ 
+ \vspace{.2cm}
+ 
+ {\bf Embedded-MAS framework}: 
+ 
+ %\vspace{.5cm}
+ 
+%  \begin{columns}
+%     \column{.4\textwidth}
+%     
+%    \begin{itemize} \scriptsize
+%     \item integrate Jason agents with physical devices \vspace{.2cm}
+%     \item multiple, extensible interfaces (e.g.ROS, serial)\vspace{.2cm}
+%     \item \url{https://github.com/embedded-mas/embedded-mas}
+%    \end{itemize}
+%  
+%     \column{.6\textwidth}
+    \begin{figure}
+ \centering
+ \includegraphics[scale=.35]{../figs/embedded_mas_overall_arhiteture-microcontroller.png}
+\end{figure}
+ 
+%  \end{columns}
+\end{frame}
 
 
 
 \begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
  
- {\bf Embedded-MAS framework}: \vspace{.2cm}
+ \vspace{.2cm}
  
- \vspace{.5cm}
+ {\bf Embedded-MAS framework}: 
  
- \begin{columns}
-    \column{.4\textwidth}
-    
-   \begin{itemize} \scriptsize
-    \item integrate Jason agents with physical devices \vspace{.2cm}
-    \item multiple, extensible interfaces (e.g.ROS, serial)\vspace{.2cm}
-    \item \url{https://github.com/embedded-mas/embedded-mas}
-   \end{itemize}
- 
-    \column{.6\textwidth}
     \begin{figure}
  \centering
- \includegraphics[scale=.25]{../figs/embedded_mas_overall_arhiteture-microcontroller_ros.png}
+ \includegraphics[scale=.35]{../figs/embedded_mas_overall_arhiteture-microcontroller_ros.png}
 \end{figure}
  
- \end{columns}
- 
 \end{frame}
+
+
 
 
 
@@ -1644,7 +1710,23 @@ Programming Jason-ROS robots requires to connect
 \end{frame}
 
 
+
+
 \begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
+
+\begin{figure}
+ \centering
+ \includegraphics[scale=.5]{../figs/Jason-ROS.pdf}
+ % Jason-ROS.pdf: 0x0 px, 300dpi, 0.00x0.00 cm, bb=
+\end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
+
+
 
 \begin{figure}
  \centering
@@ -1652,19 +1734,10 @@ Programming Jason-ROS robots requires to connect
  
 \end{figure}
 
-\end{frame}
-
-
-
-\begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
-
-\begin{figure}
- \centering
- \includegraphics[scale=.5]{Jason-ROS.pdf}
- % Jason-ROS.pdf: 0x0 px, 300dpi, 0.00x0.00 cm, bb=
-\end{figure}
+{\tiny Paper available \link{https://dl.acm.org/doi/10.1145/3765618}{here}}
 
 \end{frame}
+
 
 \begin{frame}{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
 
@@ -1699,6 +1772,7 @@ This section is is accompanied by an example available at \url{https://github.co
 \begin{frame}[fragile]{Developing Jason-ROS robots\\ {\scriptsize with the Embedded-MAS framework}}
  
  {\bf Warm up:}
+ \footnotesize
  \vspace{2em}
  \begin{enumerate}
   \item Clone the repository at \url{https://github.com/issia-2026-jason-ros/turtle-example}\\  
@@ -1707,6 +1781,10 @@ This section is is accompanied by an example available at \url{https://github.co
   \item Launch the simulator: \texttt{sudo ./launch\_ros.sh}
   \vspace{1em}
   \item Access the simulator interaface at \url{http://localhost:8080/vnc.html}
+  \item Launch the JaCaMo application\\
+     {\tiny \texttt{./gradlew run} (Linux) or \texttt{gradlew run} (Windows)}
+  
+  
   
  \end{enumerate}
 
@@ -2357,7 +2435,24 @@ By default, if the topic value has $n$ fields (s.t.~$n>1$), the produced percept
 
  \begin{column}{.52\textwidth}
  \scriptsize
- \textcolor{cyan}{e.g.}: the topic \yamlkey{/turtle1/pose} has the fields \texttt{x}, \texttt{y}, \texttt{theta}, \texttt{linear\_velocity}, and \texttt{angular\_velocity}. The corresponding percept values is\\ \textit{position(x(X),y(Y),theta(T),\\ \ \ \ \ \ \ \ \ \ linear\_velocity(L),angular\_velocity(A))}
+ 
+\textcolor{cyan}{e.g.}: the message \yamlvalue{turtlesim/Pose} has the following structure:
+
+\begin{grayblock}[0.65\linewidth]
+ \tiny
+ \vspace{-2em}
+\begin{alltt}
+float32 x
+float32 y
+float32 theta
+float32 linear_velocity
+float32 angular_velocity
+\end{alltt}
+\end{grayblock}
+ 
+ 
+ 
+ The corresponding percept values is\\ \textit{position(x(X),y(Y),theta(T),\\ \ \ \ \ \ \ \ \ \ linear\_velocity(L),angular\_velocity(A))}
 
  
  \end{column}
@@ -3075,6 +3170,18 @@ Assumption: these actions belong to the agent implementation\\
  
  \link{https://github.com/embedded-mas/jason-ros-course-wesaac2024/tree/main/resources/example_custom_ia} {Multi-agent examples}
  
+\end{frame}
+
+
+\begin{frame}{Hands on}
+
+
+
+ {\scriptsize Hands on activities available at}\\
+ 
+ \vspace{3em}
+ 
+ \link{https://github.com/issia-2026-jason-ros/hands-on-1}{https://github.com/issia-2026-jason-ros/hands-on-1}
 \end{frame}
 
 
